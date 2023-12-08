@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Pagination should take Table snaapshot 1`] = `
+<div
+  className="tablePaginator"
+>
+  <div
+    className="pageDropdown"
+  >
+    <span
+      className="desktopPageNo"
+      style={
+        Object {
+          "fontSize": "12px",
+        }
+      }
+    >
+      The page you're on
+    </span>
+    <span
+      className="MobilePageNo"
+      style={
+        Object {
+          "fontSize": "12px",
+        }
+      }
+    >
+      page
+    </span>
+    <select
+      className="pageSelector"
+      onChange={[Function]}
+    />
+  </div>
+  <ForwardRef(Box)
+    sx={
+      Object {
+        "flexShrink": 0,
+        "ml": 1.5,
+        "position": "absolute",
+        "right": "3%",
+        "top": "10%",
+      }
+    }
+  >
+    <ForwardRef(IconButton)
+      aria-label="previous page"
+      className="arrowIcon"
+      disabled={true}
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(ArrowBackIcon)) />
+    </ForwardRef(IconButton)>
+    <ForwardRef(IconButton)
+      aria-label="next page"
+      className="arrowIcon"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(ArrowForwardIcon)) />
+    </ForwardRef(IconButton)>
+  </ForwardRef(Box)>
+</div>
+`;

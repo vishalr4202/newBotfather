@@ -1,0 +1,123 @@
+@import '../../../../utilities/theme/_theme.scss';
+@import '../../../../assets/fonts/typography.scss';
+
+.tablePaginator {
+    display: flex;
+    .paginatorBox {
+        position: absolute;
+        top: 10%;
+        right: 3%;
+        font-family: Montserrat;
+        .MuiPaginationItem-ellipsis {
+            // color: #dbdfea;
+        }
+    }
+    .stack {
+        margin-top: 5px;
+        margin-right: -25px;
+    }
+    .customPagination {
+        .MuiButtonBase-root,
+        .Mui-PaginationItem-root {
+            // color: #dbdfea;
+        }
+        .Mui-selected {
+            background-color: #4eb58d33;
+            border-radius: 6px;
+            // border: 1px solid #5d97f6;
+            border: 1px solid #4eb58d;
+            color:black;
+        }
+        .Mui-selected:hover{
+            background-color: #4eb58d;
+            border-radius: 6px;
+            // border: 1px solid #5d97f6;
+            border: 1px solid #4eb58d;
+            color:white; 
+        }
+    }
+}
+.tablePaginator .MobilePageNo {
+    display: none;
+}
+.tablePaginator .pageDropdown {
+    position: absolute;
+    // right: 20%;
+    right: 25%;
+    top: 18%;
+    // @extend .c-poppins-semibold;
+    font-size: 12px;
+}
+.tablePaginator .pageDetails {
+    // @extend .c-poppins-semibold;
+    // color: #ffffff;
+    margin-top: 14px;
+    font-weight: 400;
+    font-family: Montserrat;
+}
+.pageSpanTitle {
+    font-size: 12px;
+}
+.tablePaginator .pageSpan {
+    // color: #5d97f6;
+    color:#4eb58d;
+}
+.tablePaginator .pageSelector {
+    margin-left: 20px;
+    padding: 6px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: $p800Bg;
+    cursor: pointer;
+    background: url('../../../../assets/images/tableNavIcon.svg') no-repeat;
+    background-position: calc(100% - 0.75rem) center !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    padding-right: 2rem !important;
+    background-color: $white;
+}
+
+.tablePaginator .arrowIcon {
+    background-color: $white !important;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: $p800Bg;
+    padding: 10px;
+}
+.tablePaginator .MuiSvgIcon-root {
+    font-size: 19px;
+}
+@media (max-width: 480px) {
+    .tablePaginator {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 30px;
+        .paginatorBox {
+            position: relative;
+            top: auto;
+            right: auto;
+        }
+        .stack {
+            margin-top: 5px;
+            margin-right: 0px;
+        }
+    }
+    .tablePaginator .MobilePageNo {
+        display: initial;
+    }
+    .tablePaginator .desktopPageNo {
+        display: none;
+    }
+    .tablePaginator .pageDropdown {
+        position: absolute;
+        right: 38%;
+        top: 16%;
+    }
+    .tablePaginator .pageSelector {
+        margin-left: 5px;
+    }
+}

@@ -1,0 +1,170 @@
+.profileDropDown {
+    // background-color: #24263a !important;
+    .MuiPaper-root {
+        // background-color: #24263a !important;
+        // background:linear-gradient(332deg, rgba(91, 228, 155, .5), rgba(87,90,137,1.5)) rgb(255, 255, 255) !important;
+        // background-color: white;
+        .actionmenu {
+            // color: white;
+            p {
+                font-family: Montserrat;
+                font-size: 12px;
+            }
+            font-family: Montserrat;
+        }
+    }
+    .MuiPaper-root .MuiButtonBase-root:not(:last-child) {
+        border-bottom: 1px solid #3a4456;
+    }
+    // .MuiPaper-root .MuiSwitch-root {
+    .MuiPaper-root .MuiButtonBase-root .MuiSwitch-switchBase {
+        border-bottom: none;
+    }
+    // }
+}
+.Navigation {
+    .badge-custom-css {
+        .MuiBadge-badge {
+            position: absolute;
+            transform: translate(-7px, 10px);
+            // background-color: white;
+            // color: black;
+            // font-family: 'Montserrat';
+            // font-size: 15px;
+            // font-weight: 600;
+        }
+    }
+    .navLabel {
+        // margin-left: px;
+        padding: 10px;
+        text-transform: capitalize;
+    }
+    .appbar {
+        // background-color: transparent;
+        // background: linear-gradient(90deg, transparent 4.2%, #1d1e2c 1%);
+        background-color:white;
+        color:white;
+        // box-shadow: none;
+        border-bottom: none;
+        z-index: 9999;
+        // background:linear-gradient(332deg, rgba(91, 228, 155, .5), rgba(87,90,137,1.5)) rgb(255, 255, 255);
+        // box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+        // width:100%;
+        // transition: all 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        .profileMenuDiv {
+            display: flex;
+            // color: white;
+            margin-left: 10px;
+            font-family: Montserrat !important;
+            align-items: center;
+        }
+    }
+    .openedAppbar {
+        // background: linear-gradient(90deg, #24263a 0%, #1d1e2c 0%);
+        // transition: all 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        // background: linear-gradient(0deg, transparent 0%, #1d1e2c 1%);
+        z-index: 99;
+        width:100%;
+    }
+    .MuiSvgIcon-root{
+        color: #48937d;
+    }
+    // .MuiButtonBase-root:hover{
+    //     background-color:transparent;
+    // }
+    .MuiButtonBase-root{
+        background-color:transparent;
+    }
+    .MuiAvatar-root {
+        background-color:white;
+    }
+    .divider {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    .openableDrawer {
+        // background:linear-gradient(75deg, rgba(91, 228, 155, .5), rgba(87,90,137,.7));
+        //  box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+        div {
+            justify-content: start;
+        }
+        li .MuiButtonBase-root {
+            margin-bottom: 2px;
+        }
+        .navigationlink {
+            text-decoration: none;
+            // color: white;
+
+            li {
+                border-left: 4px solid transparent;
+                span {
+                    font-family: Montserrat;
+                    font-size: 13px;
+                }
+            }
+            img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        .activeLink {
+            li {
+                // border-left: 4px solid #5d97f6;
+                border-left:4px solid #48937d;
+                .MuiButtonBase-root {
+                    // background: linear-gradient(89.97deg, rgba(93, 151, 246, 0.5) 0.45%, rgba(93, 151, 246, 0) 80.37%);
+                    background-color: rgb(72 147 125 / 23%);
+                }
+            }
+        }
+        .MuiDrawer-paperAnchorLeft {
+            // background-color: #24263a;
+            // background:linear-gradient(36deg, rgba(91, 228, 155, .5), rgb(87,90,137));
+            box-shadow:0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+            width:61px;
+            // box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+            // background-color:rgb(0 0 0 / 98%);
+            // background-image: url("../../../assets/itg-bg\(main\).png");
+        //    background-size: contain;
+            //  background-attachment: fixed;
+            //  background-position: -20px;
+        opacity:1;
+            z-index: 1300;
+            //   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+            //     0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+           
+        }
+        .MuiListItem-root .MuiListItemIcon-root,
+        .MuiListItemText-root {
+            // color: white;
+               color:black;
+        }
+        .MuiSvgIcon-root{
+            color: #48937d;
+        }
+    }
+    .opened .MuiDrawer-paper {
+        width: 252px;
+        // background:linear-gradient(335deg, rgba(91, 228, 155, 1), rgba(87,90,137,1));
+        // transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    }
+}
+
+@media (max-width: 767px) {
+    .Navigation {
+        .appbar {
+            background-color: #24263a;
+            .profileMenuDiv {
+                display: none;
+            }
+        }
+        .openableDrawer .MuiDrawer-paper {
+            width: 0px;
+            // transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        }
+        .opened .MuiDrawer-paper {
+            width: 250px;
+            transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+        }
+    }
+}

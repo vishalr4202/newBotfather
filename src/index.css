@@ -1,0 +1,222 @@
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+:root {
+  font-family: Montserrat;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat !important;
+  #demo-multiple-checkbox {
+      svg {
+          color: white;
+      }
+  }
+
+  .radio-font {
+      label {
+          span {
+              font-family: Montserrat;
+          }
+      }
+  }
+
+  [id*='menu-dropdown'] {
+      z-index: 99999 !important;
+
+      .MuiPaper-root {
+          background-color: #1d1e2c !important;
+          color: #b1c2df;
+      }
+  }
+
+  [id*='country-menu'] {
+      z-index: 99999 !important;
+  }
+
+  [id*='menu-dropdownMachineParams'] {
+      .MuiSvgIcon-root {
+          fill: white;
+      }
+  }
+
+  [id*='menu-'] {
+      z-index: 9999 !important;
+
+      ul {
+          /* background-color: #1d1e2c !important; */
+          color: #b1c2df !important;
+          font-size: 12px;
+      }
+  }
+
+  .MuiPickersPopper-root {
+      z-index: 9999 !important;
+  }
+
+  .chart_iframe.save-load-buttons{
+    display:none !important
+  }
+
+  .MuiAutocomplete-popper {
+      z-index: 9999 !important;
+
+      .MuiAutocomplete-paper {
+          background-color: #1d1e2c !important;
+          color: #b1c2df !important;
+          font-size: 12px;
+      }
+  }
+
+  .MuiCalendarOrClockPicker-root {
+      -webkit-text-fill-color: white !important;
+
+      svg {
+          color: white !important;
+      }
+  }
+
+  .hoverCard,
+  .searchMachineCard {
+      z-index: 9999 !important;
+  }
+
+  .MuiCalendarOrClockPicker-root {
+      background-color: #24263a;
+      color: #b1c2df;
+  }
+
+   /* .makeStyles-modal-2{
+       z-index: 9999 !important;
+   }
+   [class*='makeStyles-modal'] {
+       z-index: 9999 !important;
+   } */
+
+
+  .MuiPaper-root::-webkit-scrollbar {
+      width: 0.2em;
+  }
+
+  .MuiPaper-root::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      /* background-color: #24263a; */
+  }
+
+  .MuiPaper-root::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+  }
+
+  .customscrollBar::-webkit-scrollbar {
+      width: 0.2em;
+  }
+
+  .customscrollBar::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #24263a;
+  }
+
+  .customscrollBar::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+  }
+}
+
+button:focus {
+  outline: none;
+}
+
+body::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #65cca4;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

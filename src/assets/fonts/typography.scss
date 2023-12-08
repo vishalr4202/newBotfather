@@ -1,0 +1,140 @@
+/*
+https://material.io/design/typography/the-type-system.html#type-scale
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping
+
+*/
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'PoppinsRegular';
+    font-weight: normal;
+    font-style: normal;
+    src: url(./Poppins/Poppins-Regular.ttf);
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PoppinsMedium';
+    font-style: normal;
+    font-weight: 500;
+    src: url(./Poppins/Poppins-Medium.ttf);
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PoppinsSemiBold';
+    font-style: normal;
+    font-weight: 600;
+    src: url(./Poppins/Poppins-SemiBold.ttf);
+    font-display: swap;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'PoppinsRegular', 'sans-serif';
+}
+
+@media (min-width: 768px) {
+    /*override font size*/
+}
+
+/*
+
+  REF-1 : https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization
+*/
+
+.c-poppins-regular {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+}
+
+.c-poppins-medium {
+    font-family: 'PoppinsMedium', 'sans-serif' !important;
+}
+
+.c-poppins-semibold {
+    font-family: 'PoppinsSemiBold', 'sans-serif' !important;
+}
+
+.c-headline1 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 300;
+    font-size: 93px;
+    letter-spacing: -1.5px;
+}
+
+.c-headline2 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 300;
+    font-size: 93px;
+    letter-spacing: -0.5px;
+}
+.c-headline3 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 46px;
+    letter-spacing: 0px;
+}
+.c-headline4 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 33px;
+    letter-spacing: 0.25px;
+}
+.c-headline5 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 23px;
+    letter-spacing: 0px;
+}
+.c-headline6 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: 0.15px;
+}
+.c-body1 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+.c-body2 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.25px;
+}
+.c-subtitle1 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.15px;
+}
+.c-subtitle2 {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.1px;
+}
+.c-button {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1.25px;
+}
+.c-overline {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+.c-caption {
+    font-family: 'PoppinsRegular', 'sans-serif' !important;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+}

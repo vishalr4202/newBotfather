@@ -1,0 +1,82 @@
+@import '../../../utilities/theme/_theme.scss';
+@import '../../../assets/fonts/typography.scss';
+
+.TableBase .simplebar-content .MuiTableContainer-root {
+    overflow-x: auto;
+}
+
+.TableBase.clipped .simplebar-content .MuiTableContainer-root {
+    overflow-x: clip !important;
+    min-width: 100%;
+    max-height: fit-content;
+}
+.TableBase .simplebar-content {
+    overflow: initial !important;
+}
+
+.TableBase .emptyTable {
+    height: 40px;
+    text-align: center !important;
+    // background-color: #2b2d42;
+}
+
+.TableBase.clipped .nodataRow {
+    min-height: 65vh;
+}
+.nodataRow .img {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45%;
+    margin-bottom: 3%;
+}
+
+.TableBase .emptyTable td {
+    // @extend .c-poppins-medium;
+    font-size: 12px !important;
+    text-align: center !important;
+    // color: #c0c2d8;
+    border-bottom: none;
+}
+@media (max-width: 480px) {
+    .TableBase .simplebar-content .MuiTableContainer-root {
+        overflow-x: clip;
+        min-width: fit-content;
+    }
+}
+.DrawerTableBase .simplebar-content .MuiTableContainer-root {
+    overflow-x: auto;
+}
+.DrawerTableBase .emptyTable {
+    height: 40px;
+}
+.DrawerTableBase .emptyTable td {
+    // @extend .c-poppins-medium;
+    font-size: 12px !important;
+    text-align: center;
+}
+::-webkit-scrollbar {
+    width: 0.2em;
+    height: 0.2em;
+}
+::-webkit-scrollbar-track {
+    background-color: #2b2d42;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+.table_pagination {
+    // background-color: #2b2d42;
+    background-color:transparent;
+}
+.nonescroll {
+    overflow: hidden !important;
+}
+
+@media (min-width: 1100px) and (max-width: 1299px) {
+    .TableBase .simplebar-content .MuiTableContainer-root {
+        min-width: 800px;
+        overflow-x: auto;
+    }
+}

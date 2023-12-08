@@ -1,0 +1,25 @@
+@import '../../../../assets/fonts/typography.scss';
+
+.tableColumn .MuiTableCell-root {
+  //   @extend .c-poppins-semibold;
+  font-family: Montserrat;
+  font-size: 13px !important;
+  // background-color: #2e304a;
+  background-color:rgba(78, 181, 141, 0.67);
+    padding: 6px 24px;
+    position: relative;
+    // left: 5px;
+    // color: #c0c2d8;
+    border-bottom: none;
+    span.Mui-active {
+        // color: #c0c2d8;
+    }
+    span:not(.Mui-active) {
+      // color: #c0c2d8;
+  }
+ .MuiButtonBase-root-MuiCheckbox-root.Mui-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+

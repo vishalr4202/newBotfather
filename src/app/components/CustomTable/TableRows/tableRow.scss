@@ -1,0 +1,63 @@
+@import '../../../../utilities/theme/_theme.scss';
+@import '../../../../assets/fonts/typography.scss';
+
+.tableRow .MuiTableRow-root .Mui-selected {
+    background-color: rgba(25, 118, 210, 0.75) !important;
+}
+.tableRow .MuiCheckbox-root {
+    color: #c0c2d8 !important;
+}
+.tableRow .MuiCheckbox-root.Mui-checked {
+    color: #c0c2d8 !important;
+}
+.tableRow .MuiTableRow-root :nth-child(odd) {
+    background-color: $s050Bg;
+}
+.tableRow .MuiTypography-root {
+    // @extend .c-poppins-semibold;
+    font-size: 12px !important;
+}
+.tableRow .MuiTableCell-root {
+    // @extend .c-poppins-medium;
+    font-size: 12px !important;
+    // color: $s900Bg;
+    font-family: Montserrat;
+    // color: #ffffff;
+    border-bottom: 1px solid rgb(137 139 167 / 15%);
+    // border-bottom:1px solid rgb(78 181 141 / 30%);
+    // background-color: #2b2d42;
+    padding: 8px 24px 6px 24px;
+}
+.tableRow .MuiTableCell-root:after {
+    // position: absolute;
+    // bottom: -29px;
+    // width: 90%;
+    // border-bottom: solid 1px;
+    // content: "";
+}
+.tableRow .onlyRemoveText {
+    color: $p800Bg;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.tableRow .infoIcon {
+    color: $p500Bg;
+    margin-left: 4px;
+    font-size: 19px;
+}
+.tableRow .forceMajeure {
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 9px;
+}
+.tableRow .noAction {
+    padding: 16px 24px 16px 24px !important;
+}
+.tableRow .exitGreen{
+    background-color:rgba(78, 181, 141, 0.67);
+}
+.tableRow .exitRed{
+    background-color:rgba(213, 100, 100, 0.67);
+}

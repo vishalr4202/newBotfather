@@ -1,0 +1,356 @@
+@import '../../../utilities/theme/_theme.scss';
+@import '../../../assets/fonts/typography.scss';
+
+.tableToolbar .searchBox:before {
+    border-bottom: none !important;
+    transition: none !important;
+}
+
+.tableToolbar {
+    justify-content: start !important;
+    font-family: Montserrat;
+}
+
+.tableToolbar .searchBox {
+    border: 1px solid #2b2d42;
+    background-color: #1d1e2c !important;
+    height: 40px;
+    width: 430px;
+    color: #b1c2df;
+    border-radius: 10px;
+    position: relative;
+    font-family: Montserrat;
+}
+.smallSearch {
+    width: 350px !important;
+}
+
+.tableToolbar .searchBox.clip {
+    width: 300px;
+}
+
+.tableToolbar .radioSearch {
+    width: 400px;
+}
+
+.tableToolbar .toolbarRadio {
+    margin-right: 10px;
+    padding-top: 10px;
+
+    .MuiTypography-root {
+        color: rgb(177 194 223 / 80%);
+        font-size: 12px;
+    }
+
+    .MuiRadio-root {
+        color: #8793ad;
+    }
+}
+
+.tableToolbar .toolbardropdown {
+    border: 1px solid #2b2d42;
+    background-color: #1d1e2c !important;
+    width: 150px;
+    color: #b1c2df;
+    border-radius: 10px;
+    position: relative;
+    font-family: Montserrat;
+
+    .MuiOutlinedInput-root {
+        height: 40px;
+    }
+}
+
+.tableToolbar .bothButtons {
+    right: 00vw !important;
+}
+
+.tableToolbar .searchbox:hover {
+    border-bottom: none !important;
+    background-color: $white;
+}
+
+.tableToolbar .searchBox:after {
+    border-bottom: none !important;
+    transition: none !important;
+}
+
+.tableToolbar .searchBox input {
+    padding-top: 10px;
+    font-size: 13px;
+    // width: max-content;
+    // @extend .c-poppins-semibold;
+}
+
+.tableToolbar .searchBoxIcon {
+    font-size: 20px;
+}
+
+.tableToolbar .searchBoxIcon svg {
+    //   color: $p800Bg !important;
+    color: #b1c2df !important;
+}
+
+.tableToolbar .searchBoxIconCancel svg {
+    // color: $p800Bg !important;
+    color: #dadcee !important;
+}
+
+.tableToolbar .searchBoxIconCancel {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.tableToolbar .filterOutline {
+    position: absolute;
+    right: 5%;
+}
+
+.tableToolbar .filterOutline:focus {
+    outline: none;
+}
+
+.tableToolbar {
+    height: 64px !important;
+}
+
+.tableToolbar .typeAndCount {
+    // display: flex;
+    flex: 10%;
+    align-items: center;
+    width: 250px;
+    flex-wrap: wrap;
+    text-align:left;
+    // @extend .c-poppins-semibold;
+}
+
+.tableToolbar .typeAndCount h6 {
+    // @extend .c-poppins-semibold;
+    margin-top:0px;
+    // color: #dadcee;
+}
+
+.tableToolbar .typeAndCount p {
+    // @extend .c-poppins-medium;
+    //   color: $s300Bg;
+    margin-top:0px;
+    // color: #9cc2ff;
+    color:#4eb58d;
+}
+
+.tableToolbar .countOnly h6 {
+    // @extend .c-poppins-semibold;
+}
+
+.tableToolbar .countOnly p {
+    // @extend .c-poppins-medium;
+    color: $s300Bg;
+}
+
+.tableToolbar .addButton {
+    text-transform: initial;
+    padding: 8px;
+    // @extend .c-poppins-medium;
+    box-shadow: 0 3px 24px 0 rgba(15, 28, 143, 0.4) !important;
+
+    span {
+        margin-right: 10px !important;
+        margin-top: 1px;
+        font-size: 13px;
+    }
+
+    .addIcon {
+        height: 24px;
+        width: 24px;
+    }
+
+    .DownloadIcon {
+        height: 16px;
+        width: 24px;
+        margin-right: 4px;
+    }
+}
+
+.tableToolbar .noShadow {
+    box-shadow: none !important;
+    transition: all 0.3s linear;
+}
+
+.tableToolbar .reverseRow {
+    flex-direction: row-reverse;
+}
+
+.tableToolbar .addButton .MuiSvgIcon-root {
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 21px;
+}
+
+.tableToolbar .filterButtonAndAddMembers {
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+
+    div {
+        margin: 0px 5px;
+    }
+
+    button {
+        margin: 0px 12px;
+    }
+
+    .filter {
+        padding: 7px 15px;
+        border: 1px solid #e5ecf4;
+        border-radius: 10px;
+        background-color: #ffffff;
+        cursor: pointer;
+        display: flex;
+
+        img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        span {
+            height: 19px;
+            margin-top: 2px;
+            width: 37px;
+            color: $p800Bg;
+            @extend .c-poppins-regular;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+        }
+    }
+}
+
+.tableToolbar .filter {
+    padding: 7px 15px;
+    border: 1px solid #5d97f6;
+    border-radius: 6px;
+    // font-family: Montserrat !important;
+    background-color: rgba(93, 151, 246, 0.08);
+    cursor: pointer;
+    display: flex;
+
+    img {
+        width: 15px;
+        margin-right: 5px;
+    }
+
+    span {
+        height: 19px;
+
+        width: 37px;
+        // color: $p800Bg;
+        color: #5d97f6;
+        @extend .c-poppins-regular;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        font-family: Montserrat !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .tableToolbar {
+        display: block !important;
+        // height: 110px !important;
+        min-height: 110px !important;
+        height: 100% !important;
+    }
+
+    .tableToolbar .typeAndCount {
+        display: block;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .tableToolbar .countOnly {
+        display: block;
+        padding-top: 33px;
+    }
+
+    .tableToolbar .countOnly h6 {
+        font-size: 16px;
+    }
+
+    .tableToolbar .searchBox {
+        // width: 250px;
+        width: 75%;
+        position: absolute;
+        right: 18vw;
+    }
+
+    .tableToolbar .searchBox.download {
+        width: 90%;
+    }
+
+    .filter {
+        width: 50px;
+        float: right;
+
+        span {
+            display: none !important;
+        }
+    }
+
+    .tableToolbar .addButton {
+        font-size: 12px !important;
+        margin-top: 50px !important;
+        margin-bottom: 15px !important;
+        padding: 5px !important;
+        // margin-left: 25% !important;
+        text-transform: initial;
+
+        span {
+            margin-top: 2px !important;
+        }
+
+        .tableToolbar .searchBox input {
+            font-size: 9px;
+        }
+    }
+
+    .tableToolbar .buttonSearchBox {
+        width: 90% !important;
+        right: 5% !important;
+        // right: 15vw;
+    }
+
+    .tableToolbar .bothButtons {
+        right: 21vw !important;
+    }
+
+    .tableToolbar .filterButtonAndAddMembers {
+        display: block;
+
+        button {
+            width: auto;
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .tableToolbar .searchBox {
+        width: 205px;
+        right: 1vw;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .tableToolbar .searchBox {
+        width: 70%;
+        right: auto;
+        left: 15px;
+    }
+
+    .filter span {
+        display: none;
+    }
+}

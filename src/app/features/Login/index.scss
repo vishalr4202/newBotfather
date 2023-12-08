@@ -1,0 +1,153 @@
+
+.background {
+    // background:linear-gradient(135deg, rgba(91, 228, 155, 0.2), rgba(0, 167, 111, 0.2)) rgb(255, 255, 255);
+    background: linear-gradient(332deg, rgba(91, 228, 155, .5), rgba(87,90,137,1.5)) rgb(255, 255, 255);
+    // background-color:#1d1e2c;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    .loginPaper {
+      width: 450px;
+      /* height: 100vh; */
+      min-height: 45%;
+      height: auto;
+      padding: 3% 3%;
+      position: absolute;
+      top: 20%;
+      /* top: 0; */
+      right: 3%;
+      /* right: 0; */
+      /* box-shadow: 0px 3px 5px -1px #b2b0b7, 0px 6px 10px 0px #d2ccde,
+        0px 1px 18px 0px #3f51b5; */
+      /* box-shadow: none; */
+      box-shadow: 0 4px 16px rgba(21, 27, 38, 0.331);
+      /* background-color: transparent; */
+      background-color: #ffffff;
+      border-radius: 40px 4px 40px 4px;
+      .headingMain {
+        position: relative;
+        left: 3%;
+        .MuiTypography-h2 {
+          text-align: center;
+          font-size: 24px !important;
+          margin-top: 0px;
+          font-family: "poppins", "sans-serif";
+          font-weight: 300;
+        }
+        /* .MuiTypography-h3 {
+          font-size: 24px !important;
+          text-align: center;
+        } */
+  
+        /* .headingblock {
+          font-weight: 600;
+          font-size: 30px;
+          margin-bottom: 5%;
+        } */
+      }
+  
+      .loginField {
+        /* position: absolute;
+        top: 25%;
+        bottom: 0; */
+        /* padding: 30px 0px; */
+        .inputPaper {
+          position: relative;
+          /* width: 430px; */
+          margin: 10px;
+          width: 100%;
+          /* margin: 10px; */
+        }
+        .btnBlockDiv {
+          /* position: absolute;
+          right: 30%; */
+          /* display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 10%; */
+          width: 100%;
+          margin: 10px;
+          position: relative;
+        }
+      }
+  
+      .btnContainer {
+        width: 100%;
+        .btnBlock {
+          /* width: 430px; */
+          width: 100%;
+          /* background-color: #6b63ff; */
+          /* background-color: rgb(144 109 223); */
+          /* background-color: #6d90e8; */
+          /* background-color: #4e128c; */
+          background-color:#48937de0;
+          border-radius: 5px;
+        }
+      }
+    }
+    .leftGrid {
+      /* position: absolute;
+      top: 10%;
+      bottom: 0; */
+      position: absolute;
+      top: 0;
+      left: 1%;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .imageHeading {
+        color: #ffffff;
+      }
+      .leftImage {
+        width: 100%;
+        margin-top: 0%;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .imageHeading {
+      color: #ffffff;
+      font-size: 25px;
+    }
+    .leftGrid{
+      display: inline-block !important;
+      top: 1% !important;
+    }
+    .loginPaper {
+      /* width: 100% !important;
+      height: 65vh !important;
+      top: 35% !important;
+      right: 0 !important; */
+      width: 100% !important;
+      height: 57vh !important;
+      top: 43% !important;
+      right: 0 !important;
+    }
+  
+    .inputPaper {
+      position: relative !important;
+      width: 95% !important;
+      margin: 10px !important;
+    }
+  
+    .loginField {
+      top: 10% !important;
+    }
+    .btnBlock {
+      /* width: 310px !important; */
+      width: 95% !important;
+      margin: 10px !important;
+    }
+    .btnBlockDiv{
+      margin: auto !important;
+    }
+  }
+  

@@ -1,0 +1,19 @@
+.orderButtonDiv{
+    .MuiButtonBase-root{
+        margin-top:8px !important;
+        height: auto;
+    }
+}
+.add_more_icon{
+    color:rgba(78, 181, 141, 1);
+    cursor:pointer;
+    top:15px;
+    position:relative;
+}
+
+.remove_more_icon{
+    color: red;
+    cursor:pointer;
+    top:15px;
+    position:relative;
+}
