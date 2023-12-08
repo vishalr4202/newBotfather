@@ -1,5 +1,5 @@
-// export const BASEURL = 'http://13.235.150.170:8001/';
-export const BASEURL = 'http://localhost:8001/';
+export const BASEURL = 'http://13.235.150.170:8001/';
+// export const BASEURL = 'http://localhost:8001/';
 
 export const ACTION_CODES = {
     LOGIN: 'login',

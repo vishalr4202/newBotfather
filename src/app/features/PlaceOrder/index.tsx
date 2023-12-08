@@ -159,7 +159,8 @@ const PlaceOrder = () => {
     },[])
 
     const refresh = () => {
-        window.location.reload()
+        // window.location.reload()
+        getPositions()
     }
 
     return (
@@ -189,7 +190,8 @@ const PlaceOrder = () => {
 
 {/* <iframe  data-widget-name="" src="https://widget.darqube.com/chart-widget?token=65666fdd98f68b70329eb451" id="ChartWidget-2fv7uay"></iframe> */}
 
-<iframe style={{border: "none", width:"100%", height: "470px"}} data-widget-name="" src="https://widget.darqube.com/chart-widget?token=65666fdd98f68b70329eb451" id="ChartWidget-pbxj3dg"></iframe>
+{/* <iframe style={{border: "none", width:"100%", height: "470px"}} data-widget-name="" src="https://widget.darqube.com/chart-widget?token=65666fdd98f68b70329eb451" id="ChartWidget-pbxj3dg"></iframe> */}
+<iframe style={{ border: "none", width: "100%", height: "470px" }} data-widget-name="" src="https://widget.darqube.com/chart-widget?token=65666fdd98f68b70329eb451" id="ChartWidget-m5y5iaz"></iframe>
             {/* <iframe style={{width:'93vw',height:'65vh'}} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=17940&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe> */}
             </Card>
                 <Card style={{borderRadius:'0px 0px 10px 10px',padding:'15px'}}>
