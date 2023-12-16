@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Card } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { executeACGAction } from '../../store/slice';
+import { executeACGAction, updateScreenIdentifiers } from '../../store/slice';
 import { ACTION_CODES, STORE_KEYS } from '../../constants/apiConstants';
 import { createStructuredSelector } from 'reselect';
 import { acgSelector } from '../../store/selector';
@@ -11,11 +11,21 @@ import Button from '../../components/Button';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import AutocompleteDropdown from '../../components/AutocompleteDropdown';
 import './index.scss';
-import AdminPositions from '../../components/AdminPositions';
+// import AdminPositions from '../../components/AdminPositions';
+import AdminPositions from '../../components/FSAdminPositions';
 import FSInstrument from "../../../utils/FSInstruments/fsInstruments.json";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import TradingViewWidget from '../../components/BTCChart'
+import Snackbar from '../../components/Snackbar';
+// import TradingViewWidget from '../../components/BTCChart';
+
+const options = {
+    DEFAULT: {
+        message: '',
+        open: false,
+        type: ''
+    }
+  };
 
 const PlaceOrder = () => {
     const [derivative, setDerivative] = useState(false);
@@ -235,9 +245,9 @@ const PlaceOrder = () => {
             executeACGAction({
                 payload: {
                     requestType: 'GET',
-                    urlPath: ACTION_CODES.USER_GET_POSITIONS,
+                    urlPath: ACTION_CODES.FS_USER_POSITIONS,
                 },
-                storeKey: STORE_KEYS.USER_GET_POSITIONS,
+                storeKey: STORE_KEYS.FS_USER_POSITION,
                 // uniqueScreenIdentifier: {
                 //     apiKeyRecd: true
                 // }
@@ -383,8 +393,36 @@ const PlaceOrder = () => {
         }
     }
 
+    const [snackbarOptions, setSnackbarOptions] = useState(options.DEFAULT);
+
+    const closeSnackbar = () => 
+    {setSnackbarOptions(options.DEFAULT)
+        dispatch(
+            updateScreenIdentifiers({
+                storeKey: "err",
+            })
+        );
+    };
+
+    const handleSnackbarError = (err: any) => {
+     const errorMsg = err || 'Internal Server error';
+     const snackbarError = {
+         message: errorMsg,
+         type: 'remark',
+         open: true
+     };
+     setSnackbarOptions(snackbarError);
+   };
+
+   useEffect(() => {
+    if (state?.err) {
+            handleSnackbarError(state?.err);
+        }
+  }, [state?.err]);
+
     return (
         <div style={{ marginLeft: '0px', marginTop: '5px' }}>
+            <Snackbar className="login-snackbar" options={snackbarOptions} handleClose={closeSnackbar} />
             <Container maxWidth="xl" style={{ marginTop: '0px' }}>
                 <Card style={{ padding: '15px', borderRadius: '10px 10px 0px 0px' }}>
                     <iframe style={{ width: '93vw', height: '65vh' }} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=8985&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe>
@@ -495,8 +533,9 @@ const PlaceOrder = () => {
                 </Card>
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
+                {/* {state?.fspositions?.message?.data?.map((ele: any) => console.log(Number(ele?.RealizedPNL),ele?.RealizedPNL))} */}
                 {/* <center><h3>Open Positions</h3></center> */}
-                <AdminPositions data={state?.getUserPositions?.message?.net?.filter((ele: any) => ele?.quantity != 0)} type="positions" />
+                <AdminPositions data={state?.fspositions?.message?.data?.filter((ele: any) => Math.abs(Number(ele?.RealizedPNL)) == 0)} type="positions" />
             </Container>
             {/* <Container maxWidth="xl" style={{marginTop:'10px'}}>
             <Card style={{ padding: '15px', borderRadius: '10px' }}>

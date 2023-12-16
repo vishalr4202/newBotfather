@@ -19,7 +19,7 @@ const SnackbarAlert = (props: ComponentProps) => {
         <Snackbar
             open={options?.open}
             autoHideDuration={4000}
-            className={className ? className + 'acgSnackbar' : 'acgSnackbar'}
+            className={ 'acgSnackbar'}
             onClose={handleClose}
             anchorOrigin={{
                 vertical: 'top',

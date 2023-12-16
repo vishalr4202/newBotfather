@@ -51,6 +51,12 @@ class ApiService {
                     apiErrStatus: err?.data?.status,
                 };
             }
+            if(err?.data?.data){
+                return {
+                    status:err?.data?.statusCode,
+                    message:err?.data?.data
+                };
+            }
             if (err?.data?.status && err?.data?.data) {
                 return {
                     status: err?.data?.status,
@@ -66,12 +72,20 @@ class ApiService {
                 };
             }
             if(err?.message && !err?.data){
-                console.log(err,"fcgfcgffc")
+                // console.log(err,"fcgfcgffc")
                 return{
                     status:err?.status,
                     message:err?.message
                 }  
             }
+            if(err?.data?.fs_error){
+                // alert('in')
+                return{
+                    status:err?.data?.fs_error?.status,
+                    message:err?.data?.fs_error?.reason
+                }
+                }
+             
             return {
                 status: err?.status,
                 message: 'Something went wrong',
@@ -101,11 +115,12 @@ class ApiService {
                 return response?.data || response;
             })
             .catch((e: any) => {
+                // console.log(e?.response?.data,"in get err")
                 let resObj
                 if(e?.response?.data){
                     resObj = {
                        status: e?.response?.data?.status,
-                       message: e?.response?.data?.data,
+                       message: e?.response?.data?.message,
                    };
                }
             return this.handleError(resObj)

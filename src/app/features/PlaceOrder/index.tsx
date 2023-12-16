@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import { Container,Card } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { executeACGAction } from '../../store/slice';
+import { executeACGAction, updateScreenIdentifiers } from '../../store/slice';
 import { ACTION_CODES, STORE_KEYS } from '../../constants/apiConstants';
 import { createStructuredSelector } from 'reselect';
 import { acgSelector } from '../../store/selector';
@@ -13,6 +13,16 @@ import AutocompleteDropdown from '../../components/AutocompleteDropdown';
 import './index.scss';
 import AdminPositions from '../../components/AdminPositions';
 import { TickerTape } from "react-ts-tradingview-widgets";
+import Snackbar from '../../components/Snackbar';
+
+
+const options = {
+    DEFAULT: {
+        message: '',
+        open: false,
+        type: ''
+    }
+  };
 
 const PlaceOrder = () => {
     const [derivative,setDerivative] = useState(false);
@@ -163,8 +173,36 @@ const PlaceOrder = () => {
         getPositions()
     }
 
+    const [snackbarOptions, setSnackbarOptions] = useState(options.DEFAULT);
+
+    const closeSnackbar = () => {
+        setSnackbarOptions(options.DEFAULT);
+           dispatch(
+            updateScreenIdentifiers({
+                storeKey: "err",
+            })
+        );
+    }
+
+    const handleSnackbarError = (err: any) => {
+     const errorMsg = err || 'Internal Server error';
+     const snackbarError = {
+         message: errorMsg,
+         type: 'remark',
+         open: true
+     };
+     setSnackbarOptions(snackbarError);
+   };
+
+   useEffect(() => {
+    if (state?.err) {
+            handleSnackbarError(state?.err);
+        }
+  }, [state?.err]);
+
     return (
         <div style={{marginLeft:'0px',marginTop:'5px'}}>
+             <Snackbar className="login-snackbar" options={snackbarOptions} handleClose={closeSnackbar} />
             <Container maxWidth="xl" style={{ marginTop: '0px' }}>
             <Card style={{padding:'15px', borderRadius:'10px 10px 0px 0px'}}>
             {/* <TickerTape colorTheme="dark" symbols={[{

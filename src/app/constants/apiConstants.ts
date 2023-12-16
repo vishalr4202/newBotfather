@@ -1,5 +1,5 @@
-export const BASEURL = 'http://13.235.150.170:8001/';
-// export const BASEURL = 'http://localhost:8001/';
+// export const BASEURL = 'http://13.235.150.170:8001/';
+export const BASEURL = 'http://localhost:8001/';
 
 export const ACTION_CODES = {
     LOGIN: 'login',
@@ -19,6 +19,7 @@ export const ACTION_CODES = {
     SET_BASIC_TRADE:'setBasicTrade',
     GET_FS_USER_PROFILE:"fsuserDetails",
     FS_USER_ORDERS:"fsorders",
+    FS_USER_POSITIONS:"fspositions",
     FS_PLACE_SINGLE_ORDER:'fsplacesingleorder',
     FS_PLACE_MULTIPLE_ORDER:'fsplacemultiorders'
 };
@@ -41,6 +42,7 @@ export const STORE_KEYS = {
     SET_BASIC_TRADE:'basicTrade',
     FS_USER_PROFILE:"fsuserDetails",
     FS_USER_GET_ORDERS:"fsorders",
+    FS_USER_POSITION:"fspositions",
     FS_PLACE_SINGLE_ORDER:'fsplacesingleorder',
     FS_PLACE_MULTIPLE_ORDER:'fsplacemultiorders',
 };

@@ -34,30 +34,30 @@ const UserDetail = (props: any) => {
   });
   const { acgSlice: state } = useSelector(acgStateSelector);
 
-  const getMargin = () => {
-    dispatch(
-      executeACGAction({
-        payload: {
-          requestType: 'GET',
-          urlPath: ACTION_CODES.USER_GET_MARGIN,
-        },
-        storeKey: STORE_KEYS.USER_GET_MARGIN,
-        // uniqueScreenIdentifier: {
-        //     apiKeyRecd: true
-        // }
-      })
-    );
-    setDisplayBlock({ Margin: true, Positions: false, Orders: false, Profile: false })
-  };
+  // const getMargin = () => {
+  //   dispatch(
+  //     executeACGAction({
+  //       payload: {
+  //         requestType: 'GET',
+  //         urlPath: ACTION_CODES.USER_GET_MARGIN,
+  //       },
+  //       storeKey: STORE_KEYS.USER_GET_MARGIN,
+  //       // uniqueScreenIdentifier: {
+  //       //     apiKeyRecd: true
+  //       // }
+  //     })
+  //   );
+  //   setDisplayBlock({ Margin: true, Positions: false, Orders: false, Profile: false })
+  // };
 
   const getPositions = () => {
     dispatch(
       executeACGAction({
         payload: {
           requestType: 'GET',
-          urlPath: ACTION_CODES.USER_GET_POSITIONS,
+          urlPath: ACTION_CODES.FS_USER_POSITIONS,
         },
-        storeKey: STORE_KEYS.USER_GET_POSITIONS,
+        storeKey: STORE_KEYS.FS_USER_POSITION,
         // uniqueScreenIdentifier: {
         //     apiKeyRecd: true
         // }
@@ -83,17 +83,17 @@ const UserDetail = (props: any) => {
   };
 
   useEffect(() => {
-    if (state?.getUserPositions?.message?.net?.length > 0) {
+    if (state?.fspositions?.message?.data?.length > 0) {
       let pnl = 0
       let dayPnl = 0
-      state?.getUserPositions?.message?.net.map((ele: any) => {
-        return pnl += ele?.pnl
+      state?.fspositions?.message?.data.map((ele: any) => {
+        return pnl += Number(ele?.unrealizedMTOM)
       })
-      state?.getUserPositions?.message?.day.map((ele: any) => {
-        return dayPnl += ele?.pnl
+      state?.fspositions?.message?.data.map((ele: any) => {
+        return dayPnl += Number(ele?.RealizedPNL)
       })
       setPnl(pnl)
-      setDayPnl(dayPnl)
+      // setDayPnl(dayPnl)
     }
 
   }, [state?.getUserPositions?.message])
@@ -122,9 +122,9 @@ console.log(state,"statefsuseraction");
     <div className="dashboard" style={{ marginLeft: '0px' }}>
       <Container maxWidth="xl" style={{ marginTop: '10px' }}>
         <Grid container spacing={4}>
-          <Grid item xs={12} lg={3} xl={3} md={6}>
+          {/* <Grid item xs={12} lg={3} xl={3} md={6}>
             <AdminAction title="Get Margin" click={getMargin} />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} lg={3} xl={3} md={6}>
             <AdminAction title="Get Positions" click={getPositions} />
           </Grid>
@@ -150,14 +150,14 @@ console.log(state,"statefsuseraction");
         </Container>
         : null}
 
-      {state?.getUserPositions?.message && displayBlock?.Positions ?
+      {state?.fspositions?.message && displayBlock?.Positions ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
-          <center><h3>Net:</h3></center>
-          <AdminPositions data={state?.getUserPositions?.message?.net} type="positions" />
-          <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{pnl}</span></h6>
-          <center><h3>Day:</h3></center>
+          <center><h3>Unrealized: {pnl}, Realized : {dayPnl}</h3></center> 
+          <AdminPositions data={state?.fspositions?.message?.data} type="Daypositions" />
+          {/* <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{pnl}</span></h6> */}
+          {/* <center><h3>Day:</h3></center>
           <AdminPositions data={state?.getUserPositions?.message?.day} type="Daypositions" />
-          <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{dayPnl}</span></h6>
+          <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{dayPnl}</span></h6> */}
         </Container>
         : null}
 

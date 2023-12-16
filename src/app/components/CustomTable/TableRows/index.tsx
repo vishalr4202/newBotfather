@@ -345,7 +345,6 @@ const UserlistBody = (props: Props) => {
                 </TableCell>
             );
         }
-       console.log(tableType,"tap")
         if (ele === 'Action' && tableType !== 'positions' && quantity!==0) {
             return (
                 <TableCell align="left" key={cellKey}>

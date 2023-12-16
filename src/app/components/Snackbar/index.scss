@@ -1,9 +1,16 @@
 .MuiSnackbar-root{
-    left: 40% !important;
-    width:50%;
+    // left: 40% !important;
+    width:100%;
 }
 .acgSnackbar {
     font-family: 'Montserrat';
     z-index: 999999 !important;
    
+}
+
+@media (min-width: 600px){
+    .MuiSnackbar-root{
+        left:0% !important;
+        transform:translateX(0%) !important;
+    }
 }

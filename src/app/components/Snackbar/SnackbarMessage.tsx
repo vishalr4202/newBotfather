@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
         padding: '10px 14px',
         maxWidth: '100vw',
         width: 'max-content',
-        position: 'absolute',
         top: '0px !important'
     },
     orangeBackground: {

@@ -8,25 +8,23 @@ import { ACTION_CODES, STORE_KEYS } from '../../constants/apiConstants';
 import { useDispatch, useSelector } from 'react-redux';
 
 const TABLE_HEAD = [
-    { id: 'tradingsymbol', label: 'Symbol', alignRight: false },
-    { id: 'buy_price', label: 'Buy Price', alignRight: false },
-    { id: 'buy_quantity', label: 'Buy Quantity', alignRight: false },
-    { id: 'buy_value', label: 'Value', alignRight: false },
-    { id: 'sell_price', label: 'Sell Price', alignRight: false },
-    { id: 'sell_quantity', label: 'Sell Quantity', alignRight: false },
+    { id: 'tradingSymbol', label: 'Symbol', alignRight: false },
+    // { id: 'buy_price', label: 'Buy Price', alignRight: false },
+    { id: 'netQuantity', label: 'Buy Quantity', alignRight: false },
+    { id: 'uploadPrice', label: 'Buy Price', alignRight: false },
+    // { id: 'sell_quantity', label: 'Sell Quantity', alignRight: false },
     { id: 'sell_value', label: 'Sell Value', alignRight: false },
-    { id: 'pnl', label: 'P&L', alignRight: false },
+    { id: 'unrealizedMTOM', label: 'Value', alignRight: false },
+    { id: 'unrealizedMTOM', label: 'P&L', alignRight: false },
     { id : 'Action', label:'Close', alignRight:false}
 ];
 const TABLE_HEAD_DAY = [
-    { id: 'tradingsymbol', label: 'Symbol', alignRight: false },
-    { id: 'buy_price', label: 'Buy Price', alignRight: false },
-    { id: 'buy_quantity', label: 'Buy Quantity', alignRight: false },
-    { id: 'buy_value', label: 'Value', alignRight: false },
-    { id: 'sell_price', label: 'Sell Price', alignRight: false },
-    { id: 'sell_quantity', label: 'Sell Quantity', alignRight: false },
+    { id: 'tradingSymbol', label: 'Symbol', alignRight: false },
+    { id: 'uploadPrice', label: 'Buy Price', alignRight: false },
+    { id: 'netQuantity', label: 'Buy Quantity', alignRight: false },
     { id: 'sell_value', label: 'Sell Value', alignRight: false },
-    { id: 'pnl', label: 'P&L', alignRight: false },
+    { id: 'unrealizedMTOM', label: 'Value', alignRight: false },
+    { id: 'unrealizedMTOM', label: 'P&L', alignRight: false },
 ];
 
 const ORDER_TABLE_HEAD = [
@@ -87,28 +85,63 @@ const AdminPositions = (props:Props) =>{
     };
     const showRow = (event: any) => {
         console.log(event,"evt")
-        const derivative = event.tradingsymbol.includes('CE') || event.tradingsymbol.includes('PE') ? "options" : "futures"
-        const entry_type = derivative == 'options' ? event.tradingsymbol.includes('CE') ? "CE" : "PE" : null
-        let data = {
-            deriviative:derivative,
-            entry_type:entry_type,
-            transaction_type:derivative == 'options'?  event?.quantity > 0  ? "SELL" : "BUY" : derivative == "futures" ? event?.quantity > 0  ? "Short" : "Long" : null,
-            tradingsymbol:event?.tradingsymbol,
-            quantity:event.quantity,
-            order:"Market",
-            limit: null
-        }
-        console.log(derivative)
-            dispatch(
-                executeACGAction({
-                    payload: {
-                        requestType: 'POST',
-                        urlPath: ACTION_CODES.SET_BASIC_TRADE,
-                        reqObj:data
-                    },
-                    storeKey: STORE_KEYS.SET_BASIC_TRADE
-                })
-            );
+        // const derivative = event.tradingsymbol.includes('CE') || event.tradingsymbol.includes('PE') ? "options" : "futures"
+        // const entry_type = derivative == 'options' ? event.tradingsymbol.includes('CE') ? "CE" : "PE" : null
+        // let data = {
+        //     deriviative:derivative,
+        //     entry_type:entry_type,
+        //     transaction_type:derivative == 'options'?  event?.quantity > 0  ? "SELL" : "BUY" : derivative == "futures" ? event?.quantity > 0  ? "Short" : "Long" : null,
+        //     tradingsymbol:event?.tradingsymbol,
+        //     quantity:event.quantity,
+        //     order:"Market",
+        //     limit: null
+        // }
+        // console.log(derivative)
+        //     dispatch(
+        //         executeACGAction({
+        //             payload: {
+        //                 requestType: 'POST',
+        //                 urlPath: ACTION_CODES.SET_BASIC_TRADE,
+        //                 reqObj:data
+        //             },
+        //             storeKey: STORE_KEYS.SET_BASIC_TRADE
+        //         })
+        //     );
+        const newData = [event].map((ele:any) => {
+            let quantMultiple = 50;
+            if(ele?.tradingSymbol.includes('BANKNIFTY')){
+              quantMultiple = 15
+            }
+            if(ele?.tradingSymbol.includes('FINNIFTY')){
+              quantMultiple = 40
+            }
+            return{
+          exchange: "NFO",
+          tradingsymbol: ele?.tradingSymbol,
+          quantity: String(Math.abs(Number(ele?.netQuantity)/quantMultiple)),
+          price: "0",
+          product: "M",
+          transaction_type:Number(ele?.netQuantity) > 0  ? 'S' : 'B',
+          priceType:  'MKT' ,
+          retention: "IOC",
+          triggerPrice: "0",
+          remarks: "Test1"
+            }
+        })
+        console.log(newData,"newData")
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_PLACE_SINGLE_ORDER,
+                    reqObj: newData[0]
+                },
+                storeKey: STORE_KEYS.FS_PLACE_SINGLE_ORDER,
+                uniqueScreenIdentifier: {
+                    tradeRecd: true
+                }
+            })
+        )
      };
     const handleClick = (requestedBy: string) => {
         const selectedIndex = selected.indexOf(requestedBy);
@@ -125,7 +158,7 @@ const AdminPositions = (props:Props) =>{
         setSelected(newSelected);
     };
     return(
-        <Container maxWidth="xl">
+        // <Container maxWidth="xl">
             <div>
                 {/* <SnackbarAlert options={snackbarOptions} handleClose={closeSnackbar} /> */}
                 <Container
@@ -186,7 +219,7 @@ const AdminPositions = (props:Props) =>{
                     removeFn={() => {}}
                 />
             </div>
-        </Container>
+        // </Container>
     )
 }
 
