@@ -100,8 +100,9 @@ export default function AdminCustomCard(props: Props) {
                                     {type == "Profile" ? headingProfile?.map((ele: any, index: number) => {
                                         return (
                                             <Grid item xs={12} lg={12} key={index} >
+                                                {/* {console.log(profileDetails[ele])} */}
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    {ele} : {!Array.isArray(profileDetails[ele]) ? profileDetails[ele] : profileDetails[ele].join(",")}
+                                                    {ele} :  {!Array.isArray(profileDetails[ele]) ? profileDetails[ele] : profileDetails[ele].join(",")}
                                                 </Typography>
                                             </Grid>
                                         )

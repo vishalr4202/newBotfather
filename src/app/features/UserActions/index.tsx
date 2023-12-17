@@ -155,6 +155,7 @@ const UserDetail = (props: any) => {
         <Grid container spacing={4}>
           <Grid item xs={12} lg={3} xl={3} md={6}>
             <AdminAction title="Get Margin" click={getMargin} />
+         
           </Grid>
           <Grid item xs={12} lg={3} xl={3} md={6}>
             <AdminAction title="Get Positions" click={getPositions} />
@@ -167,10 +168,10 @@ const UserDetail = (props: any) => {
           </Grid>
         </Grid>
       </Container>
-      {}
-      {state?.getUserOrders?.data && displayBlock?.Orders ?
+    
+      {state?.getUserOrders?.message && displayBlock?.Orders ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
-          <AdminPositions data={state?.getUserOrders?.data?.map((ele: any) => {
+          <AdminPositions data={state?.getUserOrders?.message?.map((ele: any) => {
             var tm = new Date(ele?.order_timestamp).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' })
             let index = tm.indexOf(',')
             let time= tm.slice(index+1);
@@ -181,33 +182,33 @@ const UserDetail = (props: any) => {
         </Container>
         : null}
 
-      {state?.getUserPositions?.data && displayBlock?.Positions ?
+      {state?.getUserPositions?.message && displayBlock?.Positions ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
           <center><h3>Net:</h3></center>
-          <AdminPositions data={state?.getUserPositions?.data?.net} type="positions" />
+          <AdminPositions data={state?.getUserPositions?.message?.net} type="positions" />
           <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{pnl}</span></h6>
           <center><h3>Day:</h3></center>
-          <AdminPositions data={state?.getUserPositions?.data?.day} type="Daypositions" />
+          <AdminPositions data={state?.getUserPositions?.message?.day} type="Daypositions" />
           <h6>Total Pnl: <span style={{ position: 'absolute', right: '9.5%', fontWeight: 'bold' }}>{dayPnl}</span></h6>
         </Container>
         : null}
 
-      {state?.getUserAccountBalance?.data  && displayBlock?.Margin ?
+      {state?.getUserAccountBalance?.message  && displayBlock?.Margin ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
-          {state?.getUserAccountBalance?.data ? <AdminCustomCard detailsCommodity={state?.getUserAccountBalance?.data?.commodity?.available} detailsEquity={state?.getUserAccountBalance?.data?.equity?.available} net={state?.getUserAccountBalance?.data?.equity?.net} type="Margin" /> : null
+          {state?.getUserAccountBalance?.message ? <AdminCustomCard detailsCommodity={state?.getUserAccountBalance?.message?.commodity?.available} detailsEquity={state?.getUserAccountBalance?.message?.equity?.available} net={state?.getUserAccountBalance?.message?.equity?.net} type="Margin" /> : null
           }
         </Container>
         : null}
 
 {/* {console.log(state?.getUserAccountBalance?.message)}  */}
 
-      {state?.getUserProfile?.data  && displayBlock?.Profile ?
+      {state?.getUserProfile?.message  && displayBlock?.Profile ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
-          {state?.getUserProfile?.data ? <AdminCustomCard profileDetails={state?.getUserProfile?.data} type="Profile" /> : null
+          {state?.getUserProfile?.message ? <AdminCustomCard profileDetails={state?.getUserProfile?.message} type="Profile" /> : null
           }
         </Container>
         : null}
-      <Clipboard type="trailing"/>
+      {/* <Clipboard type="trailing"/> */}
       {/* <Clipboard type="binance"/> */}
     </div>
   );

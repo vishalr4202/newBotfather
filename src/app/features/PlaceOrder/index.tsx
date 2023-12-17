@@ -120,7 +120,7 @@ const PlaceOrder = () => {
         let data = {
             deriviative:derivative?"options":"futures",
             entry_type:derivative && optionType ? "PE" : "CE",
-            transaction_type:!derivative && BuyorSell ? 'Short' : !derivative && !BuyorSell? 'Long': derivative && !BuyorSell?'BUY' : 'SELL',
+            transaction_type:!derivative && BuyorSell ? 'SELL' : !derivative && !BuyorSell? 'BUY': derivative && !BuyorSell?'BUY' : 'SELL',
             tradingsymbol:selectedInstrument,
             quantity:Number(selectedLots)*50,
             order:orderType,
@@ -284,7 +284,7 @@ const PlaceOrder = () => {
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
                 <button onClick={refresh}>refresh</button>
             {/* ?.filter((ele:any)=>ele?.quantity != 0) */}
-              <AdminPositions data={state?.getUserPositions?.data?.net} type="positions" />
+              <AdminPositions data={state?.getUserPositions?.message?.net} type="positions" />
             </Container>
         </div>
     )

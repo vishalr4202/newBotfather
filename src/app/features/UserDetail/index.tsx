@@ -310,7 +310,7 @@ dispatch(updateScreenIdentifiers({
 
       {state?.adminGetProfile?.message && displayBlock?.Profile ?
         <Container maxWidth="xl" style={{ marginTop: '60px' }}>
-          {state?.adminGetProfile?.message ? <AdminCustomCard profileDetails={state?.adminGetProfile?.message?.data} type="Profile" /> : null
+          {state?.adminGetProfile?.message ? <AdminCustomCard profileDetails={state?.adminGetProfile?.message} type="Profile" /> : null
           }
         </Container>
         : null}

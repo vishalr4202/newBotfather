@@ -122,6 +122,7 @@ class ApiService {
             .then((response: any) => {
                 response?.data?.token && setJWTToken(response?.data?.token); 
                 response?.data?.token && setRole(response?.data?.role);
+                console.log(response,"sdfasdsacs")
                 return response?.data || response;
             })
             .catch((e: any) => {
