@@ -42,9 +42,9 @@ class ApiService {
     };
 
     getFormattedError = (err: any): any => {
-        console.log(err)
         try {
             if (err?.data?.status) {
+                console.log(err,"err 1")
                 return {
                     status:  err?.data?.status,
                     message: err?.data?.message,
@@ -52,12 +52,14 @@ class ApiService {
                 };
             }
             if(err?.data?.data){
+                console.log(err,"err 2")
                 return {
                     status:err?.data?.statusCode,
                     message:err?.data?.data
                 };
             }
             if (err?.data?.status && err?.data?.data) {
+                console.log(err,"err 3")
                 return {
                     status: err?.data?.status,
                     message: err?.data?.data,
@@ -65,6 +67,7 @@ class ApiService {
                 };
             }
             if (err?.data?.status && !err?.data?.data) {
+                console.log(err,"err 4")
                 return {
                     status: err?.data?.status,
                     message: err?.data?.data,
@@ -72,19 +75,26 @@ class ApiService {
                 };
             }
             if(err?.message && !err?.data){
-                // console.log(err,"fcgfcgffc")
+                console.log(err,"err 5")
                 return{
                     status:err?.status,
                     message:err?.message
                 }  
             }
-            if(err?.data?.fs_error){
-                // alert('in')
+            if(err?.data?.fs_error && err?.data?.fs_error?.status === 401){
+                console.log(err,"err 6")
                 return{
                     status:err?.data?.fs_error?.status,
                     message:err?.data?.fs_error?.reason
                 }
+            }
+            if(err?.data?.fs_error){
+                console.log(err,"err 6")
+                return{
+                    status:err?.data?.fs_error?.status,
+                    message:err?.data?.fs_error?.reason
                 }
+            }
              
             return {
                 status: err?.status,
@@ -115,14 +125,20 @@ class ApiService {
                 return response?.data || response;
             })
             .catch((e: any) => {
-                // console.log(e?.response?.data,"in get err")
+                console.log(e?.response?.data,"in get err")
                 let resObj
-                if(e?.response?.data){
+                if(e?.response?.data &&  (e?.response?.data?.code == 401 || e?.response?.data?.status == 401)){
                     resObj = {
                        status: e?.response?.data?.status,
-                       message: e?.response?.data?.message,
+                       message: "Please Login to the broker to view these details",
                    };
                }
+               if(e?.response?.data && (e?.response?.data?.code != 401 && e?.response?.data?.status != 401)){
+                resObj = {
+                   status: e?.response?.data?.status,
+                   message: e?.response?.data?.message,
+               };
+           }
             return this.handleError(resObj)
         });
     }

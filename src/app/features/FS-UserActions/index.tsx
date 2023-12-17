@@ -14,6 +14,7 @@ import { executeACGAction, updateScreenIdentifiers } from '../../store/slice';
 import { acgSelector } from '../../store/selector';
 import AdminCustomCard from "../../components/FSAdminCustomCard"
 import AdminPositions from '../../components/FSAdminPositions';
+import Snackbar from '../../components/Snackbar';
 const options = {
   DEFAULT: {
     message: '',
@@ -113,13 +114,43 @@ const UserDetail = (props: any) => {
     );
     setDisplayBlock({ Margin: false, Positions: false, Orders: false, Profile: true })
   };
-console.log(state,"statefsuseraction");
+// console.log(state,"statefsuseraction");
   const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  
+  const [snackbarOptions, setSnackbarOptions] = useState(options.DEFAULT);
+
+  const closeSnackbar = () => 
+  {setSnackbarOptions(options.DEFAULT)
+      dispatch(
+          updateScreenIdentifiers({
+              storeKey: "err",
+          })
+      );
+  };
+
+  const handleSnackbarError = (err: any) => {
+   const errorMsg = err || 'Internal Server error';
+   const snackbarError = {
+       message: errorMsg,
+       type: 'remark',
+       open: true
+   };
+   setSnackbarOptions(snackbarError);
+ };
+
+ useEffect(() => {
+  if (state?.err) {
+          handleSnackbarError(state?.err);
+      }
+}, [state?.err]);
+
   return (
-    <div className="dashboard" style={{ marginLeft: '0px' }}>
+    <div className="" style={{ marginLeft: '0px' }}>
+      <Snackbar className="login-snackbar" options={snackbarOptions} handleClose={closeSnackbar} />
       <Container maxWidth="xl" style={{ marginTop: '10px' }}>
         <Grid container spacing={4}>
           {/* <Grid item xs={12} lg={3} xl={3} md={6}>
