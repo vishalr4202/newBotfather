@@ -80,13 +80,26 @@ export default function Switches(props:CompProps) {
     <FormGroup style={{width:'fit-content'}}>
       <Typography component="div">
         <Grid component="label" container alignItems="center" spacing={1}>
+          {type == 'strategies' ? 
+          <Grid item style={{marginTop:'-7px'}}>{type === 'strategies' ? 'Manual' : null}</Grid>
+          :null  
+        }
           <Grid item style={{marginTop:'-7px'}}>{type === 'options' ? 'CE' : type=='Futures' ? 'Futures': type=="BUY/SELL" ? "Buy": type=="LONG/SHORT" ? "Long": null}</Grid>
           <Grid item>
-            <FormControlLabel
-        control={<PurpleSwitch checked={checked} onChange={change} name="checkedA" />}
-        label={type === 'options' ? 'PE' : type=='Futures' ? 'Options': type=="BUY/SELL" ? "Sell" :type=="LONG/SHORT" ? "Short": null}
-        style={{marginLeft:'-8px'}}
-      />
+          {type == 'strategies' ? 
+          <FormControlLabel
+          control={<PurpleSwitch checked={checked} onChange={change} name="checkedA" />}
+          label={type == 'strategies' ? 'Strategies' : null}
+          style={{marginLeft:'-8px'}}
+        />
+          :
+          <FormControlLabel
+          control={<PurpleSwitch checked={checked} onChange={change} name="checkedA" />}
+          label={type === 'options' ? 'PE' : type=='Futures' ? 'Options': type=="BUY/SELL" ? "Sell" :type=="LONG/SHORT" ? "Short": null}
+          style={{marginLeft:'-8px'}}
+        />  
+        }
+          
           </Grid>
           {/* <Grid item>On</Grid> */}
         </Grid>

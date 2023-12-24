@@ -13,9 +13,18 @@ type Props = {
   style?:any;
   value?:any;
   inputValue?:any;
+  price?:any;
+  expiry?:any;
+  hedge?:any
+  callPrice?:any;
+  putPrice?:any;
+  callBuy?:any;
+  callSell?:any
+  putBuy?:any;
+  putSell?:any
 }
 export default function ComboBox(props:Props) {
-  const {data,type,change,option,orderType,style,value} = props;
+  const {data,type,change,option,orderType,style,value,price,expiry,hedge,callPrice,putPrice,callBuy,callSell,putBuy,putSell} = props;
   return (
     <Autocomplete
       id="combo-box-demo"
@@ -23,7 +32,7 @@ export default function ComboBox(props:Props) {
       options={data}
       // getOptionLabel={type ?  (option: { tradingsymbol: any; }) => option : (option: { tradingsymbol: any; }) => option.tradingsymbol}
       style={style}
-      renderInput={(params: JSX.IntrinsicAttributes & TextFieldProps) => <TextField {...params} label={type  && !orderType? "Lots" : orderType ? 'Order Type':option ? "Strike Price": "Instruments"} variant="outlined" />}
+      renderInput={(params: JSX.IntrinsicAttributes & TextFieldProps) => <TextField {...params} label={type  && !orderType? "Lots" : orderType ? 'Order Type':option ? "Strike Price": price ? "Price" : expiry ? "Expiry" : hedge? "Hedge": putPrice?"Put Price": callPrice ? "Call Price":callSell?"Call Sell":callBuy?"Call Buy":putBuy?"Put Buy":putSell?"Put Sell": "Instruments"} variant="outlined" />}
       onChange={change}
       // inputValue={inputValue}
       // onInputChange={(event, newInputValue) => {

@@ -31,12 +31,14 @@ class ApiService {
         if (contentType === 'multipart/form-data') {
             return {
                 'Content-Type': 'multipart/form-data',
-                Authorization: getJWTToken()
+                Authorization: getJWTToken(),
+                "ngrok-skip-browser-warning":true
             };
         } else {
             return {
                 'Content-Type': 'application/json;charset=UTF-8',
-                Authorization:  getJWTToken()
+                Authorization:  getJWTToken(),
+                "ngrok-skip-browser-warning":true
             };
         }
     };

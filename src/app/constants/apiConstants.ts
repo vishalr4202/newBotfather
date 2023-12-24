@@ -1,6 +1,6 @@
-export const BASEURL = 'http://13.235.150.170:8001/';
-// export const BASEURL = 'http://localhost:8001/';
-// export const BASEURL = 'https://e5c4-2401-4900-1f27-1d19-1471-887f-fd13-ab5.ngrok-free.app/';
+// export const BASEURL = 'https://13.235.150.170:443/';
+export const BASEURL = 'http://localhost:8001/';
+// export const BASEURL = 'https://7d30-106-51-173-126.ngrok-free.app/';
 
 export const ACTION_CODES = {
     LOGIN: 'login',
@@ -22,7 +22,14 @@ export const ACTION_CODES = {
     FS_USER_ORDERS:"fsorders",
     FS_USER_POSITIONS:"fspositions",
     FS_PLACE_SINGLE_ORDER:'fsplacesingleorder',
-    FS_PLACE_MULTIPLE_ORDER:'fsplacemultiorders'
+    FS_PLACE_MULTIPLE_ORDER:'fsplacemultiorders',
+    FS_SHORT_STRADDLE:'fsshortstraddle',
+    FS_LONG_STRADDLE:'fslongstraddle',
+    FS_SHORT_STRANGLE:'fsshortstrangle',
+    FS_LONG_STRANGLE:'fslongstrangle',
+    FS_BULL_SPREAD:'fsBullCallSpread',
+    FS_BEAR_SPREAD:'fsBearPutSpread',
+    FS_GET_INSTRUMENTS:'fsgetInstruments'
 };
 
 export const STORE_KEYS = {
@@ -46,4 +53,11 @@ export const STORE_KEYS = {
     FS_USER_POSITION:"fspositions",
     FS_PLACE_SINGLE_ORDER:'fsplacesingleorder',
     FS_PLACE_MULTIPLE_ORDER:'fsplacemultiorders',
+    FS_SHORT_STRADDLE:'fsshortstraddle',
+    FS_LONG_STRADDLE:'fslongstraddle',
+    FS_SHORT_STRANGLE:'fsshortstrangle',
+    FS_LONG_STRANGLE:'fslongstrangle',
+    FS_BULL_SPREAD:'fsBullCallSpread',
+    FS_BEAR_SPREAD:'fsBearPutSpread',
+    FS_GET_INSTRUMENTS:'fsgetInstruments'
 };

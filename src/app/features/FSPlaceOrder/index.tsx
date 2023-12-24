@@ -18,14 +18,20 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Snackbar from '../../components/Snackbar';
 // import TradingViewWidget from '../../components/BTCChart';
-
+import Chip from '../../components/Chip'
+import ShortStraddle from '../../components/ShortStraddle';
+import LongStraddle from '../../components/longStraddle';
+import ShortStrangle from '../../components/ShortStrangle';
+import LongStrangle from '../../components/longStrangle';
+import BullSpread from '../../components/BullSpread';
+import BearSpread from '../../components/BearSpread';
 const options = {
     DEFAULT: {
         message: '',
         open: false,
         type: ''
     }
-  };
+};
 
 const PlaceOrder = () => {
     const [derivative, setDerivative] = useState(false);
@@ -37,7 +43,8 @@ const PlaceOrder = () => {
     const [BuyorSell, setBuyOrSell] = useState(false)
     const [limitPrice, setLimitPrice] = useState('');
     const [lotSize, setLotSize] = useState<any>([])
-
+    const [isStrategy, setIsStrategy] = useState(false);
+    const [selectedStrategy, setSelectedStrategy] = useState(0)
 
     const [multiLegged, setMultiLegged] = useState<any>([{ derivative: false, optionType: false, instruments: FSInstrument.filter((ele: any) => ele?.OptionType == "XX").map((ele: any) => ele?.TradingSymbol), selectedInstrument: "", selectedLots: [], orderType: '', BuyorSell: false, limitPrice: '', lotSize: [] }])
     const dispatch = useDispatch();
@@ -154,31 +161,31 @@ const PlaceOrder = () => {
         //     order: orderType,
         //     limit: limitPrice !== '' ? limitPrice : null
         // }
-           const newData = [...multiLegged].map((ele:any) => {
-                let quantMultiple = 50;
-                if(ele?.selectedInstrument.includes('BANKNIFTY')){
-                  quantMultiple = 15
-                }
-                if(ele?.selectedInstrument.includes('FINNIFTY')){
-                  quantMultiple = 40
-                }
-                return{
-              exchange: "NFO",
-              tradingsymbol: ele?.selectedInstrument,
-              quantity: ele?.selectedLots,
-              price: "0",
-              product: "M",
-              transaction_type:!ele?.derivative && ele?.BuyorSell ? 'S' : !ele?.derivative && !ele?.BuyorSell ? 'B' : ele?.derivative && !ele?.BuyorSell ? 'B' : 'S',
-              priceType: ele?.orderType == 'Market' ? 'MKT' :"LMT",
-              retention: "IOC",
-              triggerPrice: "0",
-              remarks: "Test1"
-                }
-            })
+        const newData = [...multiLegged].map((ele: any) => {
+            let quantMultiple = 50;
+            if (ele?.selectedInstrument.includes('BANKNIFTY')) {
+                quantMultiple = 15
+            }
+            if (ele?.selectedInstrument.includes('FINNIFTY')) {
+                quantMultiple = 40
+            }
+            return {
+                exchange: "NFO",
+                tradingsymbol: ele?.selectedInstrument,
+                quantity: ele?.selectedLots,
+                price: "0",
+                product: "M",
+                transaction_type: !ele?.derivative && ele?.BuyorSell ? 'S' : !ele?.derivative && !ele?.BuyorSell ? 'B' : ele?.derivative && !ele?.BuyorSell ? 'B' : 'S',
+                priceType: ele?.orderType == 'Market' ? 'MKT' : "LMT",
+                retention: "IOC",
+                triggerPrice: "0",
+                remarks: "Test1"
+            }
+        })
 
         // console.log(data, "data");
-        console.log(multiLegged,"legs")
-        if ( singleOrder) {
+        console.log(multiLegged, "legs")
+        if (singleOrder) {
             dispatch(
                 executeACGAction({
                     payload: {
@@ -192,28 +199,28 @@ const PlaceOrder = () => {
                     }
                 })
             )
-        } 
-        else if(!singleOrder){
+        }
+        else if (!singleOrder) {
 
-            const newData = [...multiLegged].map((ele:any) => {
+            const newData = [...multiLegged].map((ele: any) => {
                 let quantMultiple = 50;
-                if(ele?.selectedInstrument.includes('BANKNIFTY')){
-                  quantMultiple = 15
+                if (ele?.selectedInstrument.includes('BANKNIFTY')) {
+                    quantMultiple = 15
                 }
-                if(ele?.selectedInstrument.includes('FINNIFTY')){
-                  quantMultiple = 40
+                if (ele?.selectedInstrument.includes('FINNIFTY')) {
+                    quantMultiple = 40
                 }
-                return{
-              exchange: "NFO",
-              tradingSymbol: ele?.selectedInstrument,
-              quantity: String(Number(ele?.selectedLots)*quantMultiple),
-              price: "0",
-              product: "M",
-              transactionType:!ele?.derivative && ele?.BuyorSell ? 'S' : !ele?.derivative && !ele?.BuyorSell ? 'B' : ele?.derivative && !ele?.BuyorSell ? 'B' : 'S',
-              priceType: ele?.orderType == 'Market' ? 'MKT' :"LMT",
-              retention: "IOC",
-              triggerPrice: "0",
-              remarks: "Test1"
+                return {
+                    exchange: "NFO",
+                    tradingSymbol: ele?.selectedInstrument,
+                    quantity: String(Number(ele?.selectedLots) * quantMultiple),
+                    price: "0",
+                    product: "M",
+                    transactionType: !ele?.derivative && ele?.BuyorSell ? 'S' : !ele?.derivative && !ele?.BuyorSell ? 'B' : ele?.derivative && !ele?.BuyorSell ? 'B' : 'S',
+                    priceType: ele?.orderType == 'Market' ? 'MKT' : "LMT",
+                    retention: "IOC",
+                    triggerPrice: "0",
+                    remarks: "Test1"
                 }
             })
             dispatch(
@@ -374,14 +381,14 @@ const PlaceOrder = () => {
 
     }, [multiLegged])
 
-    const deleteLeg = (index:any) => {
-        alert(index)
+    const deleteLeg = (index: any) => {
+        // alert(index)
         const newData = [...multiLegged]
-        const removed = newData.filter((ele:any,innerIndex:any) => index !== innerIndex)
+        const removed = newData.filter((ele: any, innerIndex: any) => index !== innerIndex)
         const newSymb = [...instr];
-        const removedInstr = newSymb.filter((ele:any,innerIndex:any) => index !== innerIndex)
+        const removedInstr = newSymb.filter((ele: any, innerIndex: any) => index !== innerIndex)
         const newLot = [...lots]
-        const removedLot = newLot.filter((ele:any,innerIndex:any) => index !== innerIndex)
+        const removedLot = newLot.filter((ele: any, innerIndex: any) => index !== innerIndex)
         // newData.pop()
         // newSymb.pop()
         // newLot.pop()
@@ -395,8 +402,8 @@ const PlaceOrder = () => {
 
     const [snackbarOptions, setSnackbarOptions] = useState(options.DEFAULT);
 
-    const closeSnackbar = () => 
-    {setSnackbarOptions(options.DEFAULT)
+    const closeSnackbar = () => {
+        setSnackbarOptions(options.DEFAULT)
         dispatch(
             updateScreenIdentifiers({
                 storeKey: "err",
@@ -405,20 +412,156 @@ const PlaceOrder = () => {
     };
 
     const handleSnackbarError = (err: any) => {
-     const errorMsg = err || 'Internal Server error';
-     const snackbarError = {
-         message: errorMsg,
-         type: 'remark',
-         open: true
-     };
-     setSnackbarOptions(snackbarError);
-   };
+        const errorMsg = err || 'Internal Server error';
+        const snackbarError = {
+            message: errorMsg,
+            type: 'remark',
+            open: true
+        };
+        setSnackbarOptions(snackbarError);
+    };
 
-   useEffect(() => {
-    if (state?.err) {
+    useEffect(() => {
+        if (state?.err) {
             handleSnackbarError(state?.err);
         }
-  }, [state?.err]);
+    }, [state?.err]);
+
+    const handleClickChip = (chipToDelete: any) => {
+        console.log(chipToDelete)
+        setSelectedStrategy(chipToDelete?.key)
+    };
+    const placeShortStraddle = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_SHORT_STRADDLE,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_SHORT_STRADDLE,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+    const placeShortStrangle = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_SHORT_STRANGLE,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_SHORT_STRANGLE,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+    const placeLongStraddle = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_LONG_STRADDLE,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_LONG_STRADDLE,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+    const placeLongStrangle = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_LONG_STRANGLE,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_LONG_STRANGLE,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+
+    const placeBullSpread = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_BULL_SPREAD,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_BULL_SPREAD,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+    const placeBearSpread = (e:any) => {
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_BEAR_SPREAD,
+                    reqObj:e
+                },
+                storeKey: STORE_KEYS.FS_BEAR_SPREAD,
+                // uniqueScreenIdentifier: {
+                //     apiKeyRecd: true
+                // }
+            })
+        );
+    };
+
+    const placeStrategy = (e:any,type:string) => {
+        console.log(e,"ashj")
+        if(type=="shortStraddle"){
+            placeShortStraddle(e)
+        }
+        if(type=="shortStrangle"){
+            placeShortStrangle(e)
+        }
+        if(type=="longStraddle"){
+        placeLongStraddle(e)
+        }
+        if(type == "longStrangle"){
+            placeLongStrangle(e)
+        }
+        if(type == "bullSpread"){
+            placeBullSpread(e)
+        }
+        if(type=="bearSpread"){
+            placeBearSpread(e)
+        }
+    }
+
+    // const GetInstruments = () => {
+    //     dispatch(
+    //         executeACGAction({
+    //             payload: {
+    //                 requestType: 'POST',
+    //                 urlPath: ACTION_CODES.FS_GET_INSTRUMENTS,
+    //             },
+    //             storeKey: STORE_KEYS.FS_GET_INSTRUMENTS,
+    //             // uniqueScreenIdentifier: {
+    //             //     apiKeyRecd: true
+    //             // }
+    //         })
+    //     );
+    // };
+    // useEffect(() => {
+    //     GetInstruments()
+    // },[])
 
     return (
         <div style={{ marginLeft: '0px', marginTop: '5px' }}>
@@ -431,6 +574,9 @@ const PlaceOrder = () => {
                     <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0px', marginLeft: '7px' }}>
                         <div style={{ flex: '80%' }}>
                             <div className="headinglabel">Place Orders</div>
+                        </div>
+                        <div style={{ flex: '20%' }}>
+                            <Switches type="strategies" change={() => setIsStrategy(!isStrategy)} checked={isStrategy} />
                         </div>
                     </div>
 
@@ -471,70 +617,105 @@ const PlaceOrder = () => {
                     } */}
 
 
-                    { multiLegged?.map((ele: any, index: any) => {
-                        return (
-                            <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap',marginTop:'10px' }}>
-                                <div style={{ marginTop: '10px' }}>
-                                    <Switches type="Futures" change={(e: any) => changeLegValues(e, index, 'derivative')} checked={ele?.derivative} />
-                                </div>
-                                <div style={{ marginTop: '10px' }}>
-                                    {ele?.derivative ? <Switches type="options" change={(e: any) => changeLegValues(e, index, 'optionType')} checked={ele?.optionType} /> : null}
-                                </div>
-                                <div style={{ marginTop: '10px' }}>
-                                    {!ele?.derivative ? <Switches type="LONG/SHORT" change={(e: any) => changeLegValues(e, index, 'BuyorSell')} checked={ele?.BuyorSell} /> : null}
-                                </div>
-                                <div style={{ marginTop: '10px' }}>
-                                    {ele?.derivative ? <Switches type="BUY/SELL" change={(e: any) => changeLegValues(e, index, 'BuyorSell')} checked={ele?.BuyorSell} /> : null}
-                                </div>
+                    {!isStrategy ? <div>
+                        {multiLegged?.map((ele: any, index: any) => {
+                            return (
+                                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '10px' }}>
+                                    <div style={{ marginTop: '10px' }}>
+                                        <Switches type="Futures" change={(e: any) => changeLegValues(e, index, 'derivative')} checked={ele?.derivative} />
+                                    </div>
+                                    <div style={{ marginTop: '10px' }}>
+                                        {ele?.derivative ? <Switches type="options" change={(e: any) => changeLegValues(e, index, 'optionType')} checked={ele?.optionType} /> : null}
+                                    </div>
+                                    <div style={{ marginTop: '10px' }}>
+                                        {!ele?.derivative ? <Switches type="LONG/SHORT" change={(e: any) => changeLegValues(e, index, 'BuyorSell')} checked={ele?.BuyorSell} /> : null}
+                                    </div>
+                                    <div style={{ marginTop: '10px' }}>
+                                        {ele?.derivative ? <Switches type="BUY/SELL" change={(e: any) => changeLegValues(e, index, 'BuyorSell')} checked={ele?.BuyorSell} /> : null}
+                                    </div>
 
-                                {ele?.instruments ? <Autocomplete data={instr[index]} change={(e: any) => changeLegValues(e, index, 'selectedInstr')} option={ele?.derivative} style={{ width: '270px' }} value={ele?.selectedInstrument} /> : <h6 style={{ marginTop: '17px' }}>No Instruments data, please login to your broker</h6>}
-                                {ele?.instruments ? <Autocomplete data={lots[index]} type="numbers" change={(e: any) => changeLegValues(e, index, 'selectedLots')} value={ele?.selectedLots} /> : null}
-                                {ele?.instruments ? <Autocomplete data={['Market', 'Limit']} orderType={true} change={(e: any) => changeLegValues(e, index, 'orderType')} type="numbers" style={{ width: '180px' }} value={ele?.orderType} /> : null}
-                                {ele?.orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e) => setLimitPriceValue(e)} type="number" value={ele?.limitPrice} style={{ width: '120px' }} /> : null}
-                                <div style={{display:'flex',flexDirection:'column'}}>
-                               
-                                {index == 0 ? null : <DeleteOutlineIcon onClick={()=>deleteLeg(index)}className='remove_more_icon'></DeleteOutlineIcon>}
+                                    {ele?.instruments ? <Autocomplete data={instr[index]} change={(e: any) => changeLegValues(e, index, 'selectedInstr')} option={ele?.derivative} style={{ width: '270px' }} value={ele?.selectedInstrument} /> : <h6 style={{ marginTop: '17px' }}>No Instruments data, please login to your broker</h6>}
+                                    {ele?.instruments ? <Autocomplete data={lots[index]} type="numbers" change={(e: any) => changeLegValues(e, index, 'selectedLots')} value={ele?.selectedLots} /> : null}
+                                    {ele?.instruments ? <Autocomplete data={['Market', 'Limit']} orderType={true} change={(e: any) => changeLegValues(e, index, 'orderType')} type="numbers" style={{ width: '180px' }} value={ele?.orderType} /> : null}
+                                    {ele?.orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e) => setLimitPriceValue(e)} type="number" value={ele?.limitPrice} style={{ width: '120px' }} /> : null}
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+                                        {index == 0 ? null : <DeleteOutlineIcon onClick={() => deleteLeg(index)} className='remove_more_icon'></DeleteOutlineIcon>}
+                                    </div>
+                                    {index == 0 && singleOrder ?
+                                        <div className="orderButtonDiv">
+                                            <Button
+                                                formInput="buttonDiv"
+                                                className="simpleLoginButton"
+                                                fullWidth
+                                                name="Place Order"
+                                                //  instruments?.length > 0 && 
+                                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
+                                                type="submit"
+                                                variant="contained"
+                                                secondary={false}
+                                                handleClick={submitOrder}
+                                            />
+                                        </div> : null}
+
+                                    {index == multiLegged?.length - 1 ? <AddCircleOutlineIcon onClick={addLeg} className="add_more_icon">add leg</AddCircleOutlineIcon> : null}
+                                    {index == multiLegged?.length - 1 && !singleOrder ?
+                                        <div className="orderButtonDiv">
+                                            <Button
+                                                formInput="buttonDiv"
+                                                className="simpleLoginButton"
+                                                fullWidth
+                                                name="Place Order"
+                                                //  instruments?.length > 0 && 
+                                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
+                                                type="submit"
+                                                variant="contained"
+                                                secondary={false}
+                                                handleClick={submitOrder}
+                                            />
+                                        </div> : null}
                                 </div>
-                               {index == 0 && singleOrder?  
-                                <div className="orderButtonDiv">
-                                   <Button
-                                formInput="buttonDiv"
-                                className="simpleLoginButton"
-                                fullWidth
-                                name="Place Order"
-                                //  instruments?.length > 0 && 
-                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
-                                type="submit"
-                                variant="contained"
-                                secondary={false}
-                                handleClick={submitOrder}
-                            />
-                             </div>:null}
-                              
-                             {index == multiLegged?.length -1 ? <AddCircleOutlineIcon onClick={addLeg} className="add_more_icon">add leg</AddCircleOutlineIcon> : null }
-                             {index == multiLegged?.length - 1 && !singleOrder?  
-                                <div className="orderButtonDiv">
-                                   <Button
-                                formInput="buttonDiv"
-                                className="simpleLoginButton"
-                                fullWidth
-                                name="Place Order"
-                                //  instruments?.length > 0 && 
-                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
-                                type="submit"
-                                variant="contained"
-                                secondary={false}
-                                handleClick={submitOrder}
-                            />
-                             </div>:null}
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div> :
+                        <div>
+                            <Chip click={handleClickChip} active={selectedStrategy} />
+                            {isStrategy ?
+                                <div>
+                                    {selectedStrategy == 0 ? <ShortStraddle click={(e:any)=>placeStrategy(e,"shortStraddle")}/> : null}
+                                    {selectedStrategy == 1 ? <ShortStrangle click={(e:any)=>placeStrategy(e,"shortStrangle")}/> : null}
+                                    {selectedStrategy == 2 ? <LongStraddle click = {(e:any)=>placeStrategy(e,"longStraddle")} /> : null}
+                                    {selectedStrategy == 3 ? <LongStrangle click = {(e:any)=>placeStrategy(e,"longStrangle")} /> : null}
+                                    {selectedStrategy == 4 ? <BullSpread click = {(e:any)=>placeStrategy(e,"bullSpread")} /> : null}
+                                    {selectedStrategy == 5 ? <BearSpread click = {(e:any)=>placeStrategy(e,"bearSpread")} /> : null}
+                                    {/* <ShortStraddle click={(e:any)=>placeStrategy(e)}/> */}
+                                </div>
+                                : null}
+                        </div>
+
+                    }
                 </Card>
+                {/* <Card>
+                    {isStrategy ?
+                    <div>
+                        <ShortStraddle />
+                        <div style={{width:'200px',margin:'0 auto',paddingBottom:'10px'}}>
+                          
+                            <Button
+                                // className="simpleLoginButton"
+                                fullWidth
+                                name="Place Order"
+                                variant="contained"
+                                secondary={false}
+                                handleClick={placeStrategy}
+                            />
+                        </div>
+                        </div>
+                        : null}
+                </Card> */}
+
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
-                {/* {state?.fspositions?.message?.data?.map((ele: any) => console.log(Number(ele?.RealizedPNL),ele?.RealizedPNL))} */}
-                {/* <center><h3>Open Positions</h3></center> */}
                 <AdminPositions data={state?.fspositions?.message?.data?.filter((ele: any) => Math.abs(Number(ele?.RealizedPNL)) == 0)} type="positions" />
             </Container>
             {/* <Container maxWidth="xl" style={{marginTop:'10px'}}>
