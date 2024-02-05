@@ -29,7 +29,8 @@ export const ACTION_CODES = {
     FS_LONG_STRANGLE:'fslongstrangle',
     FS_BULL_SPREAD:'fsBullCallSpread',
     FS_BEAR_SPREAD:'fsBearPutSpread',
-    FS_GET_INSTRUMENTS:'fsgetInstruments'
+    FS_GET_INSTRUMENTS:'fsgetInstruments',
+    FS_GET_USERKEYS:'fsGetUserKeys'
 };
 
 export const STORE_KEYS = {
@@ -59,5 +60,6 @@ export const STORE_KEYS = {
     FS_LONG_STRANGLE:'fslongstrangle',
     FS_BULL_SPREAD:'fsBullCallSpread',
     FS_BEAR_SPREAD:'fsBearPutSpread',
-    FS_GET_INSTRUMENTS:'fsgetInstruments'
+    FS_GET_INSTRUMENTS:'fsgetInstruments',
+    FS_GET_USERKEYS:'fsGetUserKeys'
 };

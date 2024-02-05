@@ -408,17 +408,17 @@ export default function User(props: Props) {
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row: any) => {
                                             const id = row[idKey];
-                                            const {email,time,tradingsymbol, quantity} = row;
-                                            const isItemSelected = selected.indexOf(email || time || tradingsymbol) !== -1;
+                                            const {email,time,tradingsymbol, quantity,tradingSymbol} = row;
+                                            const isItemSelected = selected.indexOf(email || time || tradingsymbol || tradingSymbol) !== -1;
                                             return (
                                                 <TableRows
-                                                    key={email || time || tradingsymbol}
+                                                    key={email || time || tradingsymbol || tradingSymbol}
                                                     isItemSelected={isItemSelected}
                                                     click={() => selectRow(row)}
                                                     header={headers}
                                                     row={row}
                                                     selectable={selectable}
-                                                    change={() => rowChange(email || time || tradingsymbol)}
+                                                    change={() => rowChange(email || time || tradingsymbol || tradingSymbol)}
                                                     route={route}
                                                     editMenu={editMenu}
                                                     link={link}

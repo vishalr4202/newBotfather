@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,memo } from 'react';
 import { Container, Card } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { executeACGAction, updateScreenIdentifiers } from '../../store/slice';
@@ -25,6 +25,7 @@ import ShortStrangle from '../../components/ShortStrangle';
 import LongStrangle from '../../components/longStrangle';
 import BullSpread from '../../components/BullSpread';
 import BearSpread from '../../components/BearSpread';
+import Chart from '../../components/FS_Charts/index.jsx';
 const options = {
     DEFAULT: {
         message: '',
@@ -45,7 +46,9 @@ const PlaceOrder = () => {
     const [lotSize, setLotSize] = useState<any>([])
     const [isStrategy, setIsStrategy] = useState(false);
     const [selectedStrategy, setSelectedStrategy] = useState(0)
-
+    const [chartSymbol, setChartSymbol] = useState<any>([FSInstrument.map((ele: any) => ele?.TradingSymbol)])
+    const [selectedChartSymbol,setSelectedChartSymbol] = useState('')
+    const [chartToken,setChartToken] = useState('26000')
     const [multiLegged, setMultiLegged] = useState<any>([{ derivative: false, optionType: false, instruments: FSInstrument.filter((ele: any) => ele?.OptionType == "XX").map((ele: any) => ele?.TradingSymbol), selectedInstrument: "", selectedLots: [], orderType: '', BuyorSell: false, limitPrice: '', lotSize: [] }])
     const dispatch = useDispatch();
     const acgStateSelector = createStructuredSelector({
@@ -263,7 +266,12 @@ const PlaceOrder = () => {
     };
 
     useEffect(() => {
-        getPositions()
+       const x = setInterval(() => {
+            getPositions()
+        },2000)
+        return () => {
+            clearInterval(x)
+        }
     }, [])
 
     const [instr, setInstr] = useState<any>([FSInstrument.filter((ele: any) => ele?.OptionType == "XX").map((ele: any) => ele?.TradingSymbol)])
@@ -285,7 +293,7 @@ const PlaceOrder = () => {
     }
 
     const changeLegValues = (e: any, index: any, text: string) => {
-        console.log(e.target.checked, index, text, "inner")
+        console.log(e.target.innerText, index, text, "inner")
         const data = [...multiLegged]
         const newData = data.map((ele: any, index1: any) => {
             if (index == index1) {
@@ -562,13 +570,34 @@ const PlaceOrder = () => {
     // useEffect(() => {
     //     GetInstruments()
     // },[])
+const changeMainSymbol = (e:any) => {
+    const Instrtoken = FSInstrument.filter((ele:any)=> ele?.TradingSymbol==e.target.innerText)
+    setSelectedChartSymbol(e.target.innerText)
+    setChartToken(JSON.stringify(Instrtoken[0]?.Token))
+}
 
+
+useEffect(() => {
+    if(state?.fsGetUserKeys?.message == undefined){
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'GET',
+                    urlPath: ACTION_CODES.FS_GET_USERKEYS
+                },
+                storeKey: STORE_KEYS.FS_GET_USERKEYS
+            })
+        );
+    } 
+}, [])
+ {/* <iframe style={{ width: '93vw', height: '65vh' }} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=8985&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe> */}
     return (
-        <div style={{ marginLeft: '0px', marginTop: '5px' }}>
+        <div style={{ marginLeft: '0px',marginTop:'5px' }}>
             <Snackbar className="login-snackbar" options={snackbarOptions} handleClose={closeSnackbar} />
             <Container maxWidth="xl" style={{ marginTop: '0px' }}>
                 <Card style={{ padding: '15px', borderRadius: '10px 10px 0px 0px' }}>
-                    <iframe style={{ width: '93vw', height: '65vh' }} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=8985&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe>
+                    <Autocomplete data={chartSymbol[0]} change={(e: any) =>{changeMainSymbol(e)}} option={''} style={{ width: '270px' }} value={selectedChartSymbol} />
+                    {state?.fsGetUserKeys?.message ? <Chart symbol={chartToken == undefined ? '26000' : chartToken } fsGetUserKeys={state?.fsGetUserKeys?.message}/> : null}
                 </Card>
                 <Card style={{ borderRadius: '0px 0px 10px 10px', padding: '15px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0px', marginLeft: '7px' }}>
@@ -579,43 +608,6 @@ const PlaceOrder = () => {
                             <Switches type="strategies" change={() => setIsStrategy(!isStrategy)} checked={isStrategy} />
                         </div>
                     </div>
-
-                    {/* {singleOrder ?
-                        <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-                            <div style={{ marginTop: '10px' }}>
-                                <Switches type="Futures" change={setDerivativeValue} checked={derivative} />
-                            </div>
-                            <div style={{ marginTop: '10px' }}>
-                                {derivative ? <Switches type="options" change={setOptionValue} checked={optionType} /> : null}
-                            </div>
-                            <div style={{ marginTop: '10px' }}>
-                                {!derivative ? <Switches type="LONG/SHORT" change={setBuyOrSellValue} checked={BuyorSell} /> : null}
-                            </div>
-                            <div style={{ marginTop: '10px' }}>
-                                {derivative ? <Switches type="BUY/SELL" change={setBuyOrSellValue} checked={BuyorSell} /> : null}
-                            </div>
-                            {instruments ? <Autocomplete data={instruments} change={getSelectedInstr} option={derivative} style={{ width: '270px' }} value={selectedInstrument} /> : <h6 style={{ marginTop: '17px' }}>No Instruments data, please login to your broker</h6>}
-                            {instruments ? <Autocomplete data={lotSize} type="numbers" change={getSelectedLot} value={selectedLots} /> : null}
-                            {instruments ? <Autocomplete data={['Market', 'Limit']} orderType={true} change={getOrderType} type="numbers" style={{ width: '180px' }} value={orderType} /> : null}
-                            {orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e) => setLimitPriceValue(e)} type="number" value={limitPrice} style={{ width: '120px' }} /> : null}
-                            <div className="orderButtonDiv">
-                                <Button
-                                    formInput="buttonDiv"
-                                    className="simpleLoginButton"
-                                    fullWidth
-                                    name="Place Order"
-                                    //  instruments?.length > 0 && 
-                                    disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
-                                    type="submit"
-                                    variant="contained"
-                                    secondary={false}
-                                    handleClick={submitOrder}
-                                />
-                            </div>
-                        </div>
-                        : null
-                    } */}
-
 
                     {!isStrategy ? <div>
                         {multiLegged?.map((ele: any, index: any) => {
@@ -649,8 +641,6 @@ const PlaceOrder = () => {
                                                 className="simpleLoginButton"
                                                 fullWidth
                                                 name="Place Order"
-                                                //  instruments?.length > 0 && 
-                                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
                                                 type="submit"
                                                 variant="contained"
                                                 secondary={false}
@@ -666,9 +656,6 @@ const PlaceOrder = () => {
                                                 className="simpleLoginButton"
                                                 fullWidth
                                                 name="Place Order"
-                                                //  instruments?.length > 0 && 
-                                                // disabled={selectedInstrument !== '' && selectedLots != '' && orderType !== '' ? false : true}
-                                                type="submit"
                                                 variant="contained"
                                                 secondary={false}
                                                 handleClick={submitOrder}
@@ -688,43 +675,17 @@ const PlaceOrder = () => {
                                     {selectedStrategy == 3 ? <LongStrangle click = {(e:any)=>placeStrategy(e,"longStrangle")} /> : null}
                                     {selectedStrategy == 4 ? <BullSpread click = {(e:any)=>placeStrategy(e,"bullSpread")} /> : null}
                                     {selectedStrategy == 5 ? <BearSpread click = {(e:any)=>placeStrategy(e,"bearSpread")} /> : null}
-                                    {/* <ShortStraddle click={(e:any)=>placeStrategy(e)}/> */}
                                 </div>
                                 : null}
                         </div>
 
                     }
                 </Card>
-                {/* <Card>
-                    {isStrategy ?
-                    <div>
-                        <ShortStraddle />
-                        <div style={{width:'200px',margin:'0 auto',paddingBottom:'10px'}}>
-                          
-                            <Button
-                                // className="simpleLoginButton"
-                                fullWidth
-                                name="Place Order"
-                                variant="contained"
-                                secondary={false}
-                                handleClick={placeStrategy}
-                            />
-                        </div>
-                        </div>
-                        : null}
-                </Card> */}
 
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
                 <AdminPositions data={state?.fspositions?.message?.data?.filter((ele: any) => Math.abs(Number(ele?.RealizedPNL)) == 0)} type="positions" />
             </Container>
-            {/* <Container maxWidth="xl" style={{marginTop:'10px'}}>
-            <Card style={{ padding: '15px', borderRadius: '10px' }}>
-            <div style={{height:'100vh'}}>
-            <TradingViewWidget />
-            </div>
-            </Card>
-            </Container> */}
         </div>
     )
 }

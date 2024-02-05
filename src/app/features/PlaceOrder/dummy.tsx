@@ -165,23 +165,22 @@ const PlaceOrder = () => {
         );
     };
 
-    useEffect(() => {
-        if(state?.loginData?.access['Zerodha'] == true){
-          getPositions()
-        }
+    // useEffect(() => {
+    //     if(state?.loginData?.access['Zerodha'] == true){
+    //       getPositions()
+    //     }
         
-        if(!renderChart){
-            setRenderChart(true)
-        }
-        else{
-            setRenderChart(false)
-        }
-       
-    }, [])
+    //     if(!renderChart){
+    //         setRenderChart(true)
+    //     }
+    //     else{
+    //         setRenderChart(false)
+    //     }
+    // }, [])
 
     const refresh = () => {
         // window.location.reload()
-        getPositions()
+        // getPositions()
     }
 
     const [snackbarOptions, setSnackbarOptions] = useState(options.DEFAULT);
@@ -259,7 +258,7 @@ const PlaceOrder = () => {
                  {derivative ? <Switches type="options" change={setOptionValue} checked={optionType}/> : null}
                  </div>
                 </div> */}
-
+{/* 
                     <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                         <div style={{ marginTop: '10px' }}>
                             <Switches type="Futures" change={setDerivativeValue} checked={derivative} />
@@ -290,13 +289,11 @@ const PlaceOrder = () => {
                                 handleClick={submitOrder}
                             />
                         </div>
-                    </div>
+                    </div> */}
 
                 </Card>
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
-                <button onClick={refresh}>refresh</button>
-                {/* ?.filter((ele:any)=>ele?.quantity != 0) */}
                 <AdminPositions data={state?.getUserPositions?.message?.net} type="positions" />
             </Container>
         </div>

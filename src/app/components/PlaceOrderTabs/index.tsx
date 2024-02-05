@@ -49,16 +49,18 @@ console.log("placeorder")
     <Box sx={{ width: '100%',marginTop:'40px'  }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab label="Zerodha" {...a11yProps(0)} />
-          <Tab label="Firstock" {...a11yProps(1)} />
+         <Tab label="Firstock" {...a11yProps(0)} />
+          <Tab label="Zerodha" {...a11yProps(1)} />
+         
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <PlaceOrder />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
       <FSPlaceOrder />
       </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <PlaceOrder />
+      </CustomTabPanel>
+     
     </Box>
   );
 }

@@ -85,7 +85,7 @@ const UserlistBody = (props: Props) => {
         onlyDeleteModeInner,
         tableType
     } = props;
-    const { id, email,symbol, role, status, company, avatarUrl, isVerified, OnboardStatus, time , tradingsymbol,quantity,pnl } = row;
+    const { id, email,symbol, role, status, company, avatarUrl, isVerified, OnboardStatus, time , tradingsymbol,quantity,pnl,tradingSymbol } = row;
 
     const history = useHistory();
     const orderList = header.map((ele: any) => {
@@ -317,6 +317,15 @@ const UserlistBody = (props: Props) => {
                 </TableCell>
             );
         }
+        if (ele === 'LTP') {
+            const getInitial = row['netQuantity']*row['netUploadPrice'];
+            const ltp = Number(getInitial) + Number(row['unrealizedMTOM'])
+            return (
+                <TableCell align="left" key={cellKey}>
+                    {ltp/row['netQuantity'] ?ltp/row['netQuantity'] : 'Closed' }
+                </TableCell>
+            );
+        }
 
         if (ele === 'status' || ele === 'OnboardStatus') {
             return (
@@ -330,7 +339,8 @@ const UserlistBody = (props: Props) => {
                                     : status === 'Active' ||
                                         status === 'Approved' ||
                                         status === 'Onboarded' ||
-                                        OnboardStatus === 'Onboarded'
+                                        OnboardStatus === 'Onboarded'||
+                                        status === 'COMPLETE'
                                         ? 'general'
                                         : status === 'REJECTED' || status === 'Unassigned' || OnboardStatus === 'Unassigned'
                                             ? 'failure'
@@ -358,7 +368,7 @@ const UserlistBody = (props: Props) => {
             );
         }
         else if(ele === 'Action' && quantity !== 0 && tableType=='positions'){
-            let isProfit =  Number(pnl) > 0;
+            let isProfit =  Number(pnl) > 0 || row['unrealizedMTOM'] > 0;
             return (
                 <TableCell align="left" key={cellKey}>
                     <Button
@@ -439,12 +449,12 @@ const UserlistBody = (props: Props) => {
                             isPermission
                                 ? (event: any) => {
                                     handleCheckAndRadio();
-                                    change(event, email || time || tradingsymbol );
+                                    change(event, email || time || tradingsymbol||tradingSymbol );
                                 }
                                 : (event: any) => {
                                     event.nativeEvent.stopImmediatePropagation();
                                     event.stopPropagation();
-                                    change(event, email || time || tradingsymbol );
+                                    change(event, email || time || tradingsymbol || tradingSymbol );
                                 }
                         }
                     />

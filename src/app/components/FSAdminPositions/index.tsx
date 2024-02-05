@@ -11,19 +11,17 @@ const TABLE_HEAD = [
     { id: 'tradingSymbol', label: 'Symbol', alignRight: false },
     // { id: 'buy_price', label: 'Buy Price', alignRight: false },
     { id: 'netQuantity', label: 'Buy Quantity', alignRight: false },
-    { id: 'uploadPrice', label: 'Buy Price', alignRight: false },
-    // { id: 'sell_quantity', label: 'Sell Quantity', alignRight: false },
-    { id: 'sell_value', label: 'Sell Value', alignRight: false },
-    { id: 'unrealizedMTOM', label: 'Value', alignRight: false },
+    { id: 'netUploadPrice', label: 'Entry Price', alignRight: false },
+    { id: 'LTP', label: 'LTP', alignRight: false },
     { id: 'unrealizedMTOM', label: 'P&L', alignRight: false },
     { id : 'Action', label:'Close', alignRight:false}
 ];
 const TABLE_HEAD_DAY = [
     { id: 'tradingSymbol', label: 'Symbol', alignRight: false },
-    { id: 'uploadPrice', label: 'Buy Price', alignRight: false },
-    { id: 'netQuantity', label: 'Buy Quantity', alignRight: false },
-    { id: 'sell_value', label: 'Sell Value', alignRight: false },
-    { id: 'unrealizedMTOM', label: 'Value', alignRight: false },
+    { id: 'netQuantity', label: 'Quantity', alignRight: false },
+    { id: 'netUploadPrice', label: 'Entry Price', alignRight: false },
+    { id: 'LTP', label: 'LTP', alignRight: false },
+    // { id: 'sell_value', label: 'Sell Value', alignRight: false },
     { id: 'unrealizedMTOM', label: 'P&L', alignRight: false },
 ];
 
@@ -72,11 +70,12 @@ const AdminPositions = (props:Props) =>{
                 else if(filteredList[i].time){
                     newSelecteds.push(filteredList[i].time)  
                 }
-                else if(filteredList[i].tradingsymbol){
-                    newSelecteds.push(filteredList[i].tradingsymbol);
+                else if(filteredList[i].tradingSymbol){
+                    newSelecteds.push(filteredList[i].tradingSymbol);
                 }
                
             }
+            console.log(newSelecteds)
             const toRemove = tableData.slice(page, tableData.length);
             setSelected(newSelecteds);
             return;
@@ -144,6 +143,7 @@ const AdminPositions = (props:Props) =>{
         )
      };
     const handleClick = (requestedBy: string) => {
+        console.log(requestedBy,"req")
         const selectedIndex = selected.indexOf(requestedBy);
         let newSelected: any[] | ((prevState: unknown[]) => unknown[]) = [];
         if (selectedIndex === -1) {
