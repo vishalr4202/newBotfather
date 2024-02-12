@@ -106,7 +106,7 @@ const longStraddle = (props: Props) => {
             </div>
             <div style={{ width: '200px', margin: '0 auto', paddingBottom: '10px' }}>
                 <Button
-                    className="simpleLoginButton"
+                    className="simpleOrderButton"
                     fullWidth
                     name="Place Order"
                     variant="contained"

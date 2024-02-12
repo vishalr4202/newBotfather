@@ -37,9 +37,9 @@ const ORDER_TABLE_HEAD = [
     { id: 'orderTime', label: 'Order Time', alignRight: false },
 ]
 
-type Props = {data?: any,type?:string ,selectable?:boolean};
+type Props = {data?: any,type?:string ,selectable?:boolean,admin?:boolean,setName?: string};
 const AdminPositions = (props:Props) =>{
-    const {data,type,selectable} = props
+    const {data,type,selectable,admin,setName} = props
     const [page, setPage] = useState<number>(0);
     const [order, setOrder] = useState('desc');
     const [orderBy, setOrderBy] = useState(type == "orders" ? 'order_id':'tradingsymbol');
@@ -106,41 +106,71 @@ const AdminPositions = (props:Props) =>{
         //             storeKey: STORE_KEYS.SET_BASIC_TRADE
         //         })
         //     );
-        const newData = [event].map((ele:any) => {
-            let quantMultiple = 50;
-            if(ele?.tradingSymbol.includes('BANKNIFTY')){
-              quantMultiple = 15
-            }
-            if(ele?.tradingSymbol.includes('FINNIFTY')){
-              quantMultiple = 40
-            }
-            return{
-          exchange: "NFO",
-          tradingsymbol: ele?.tradingSymbol,
-          quantity: String(Math.abs(Number(ele?.netQuantity)/quantMultiple)),
-          price: "0",
-          product: "M",
-          transaction_type:Number(ele?.netQuantity) > 0  ? 'S' : 'B',
-          priceType:  'MKT' ,
-          retention: "IOC",
-          triggerPrice: "0",
-          remarks: "Test1"
-            }
-        })
-        console.log(newData,"newData")
-        dispatch(
-            executeACGAction({
-                payload: {
-                    requestType: 'POST',
-                    urlPath: ACTION_CODES.FS_PLACE_SINGLE_ORDER,
-                    reqObj: newData[0]
-                },
-                storeKey: STORE_KEYS.FS_PLACE_SINGLE_ORDER,
-                uniqueScreenIdentifier: {
-                    tradeRecd: true
+        if(!admin){
+            const newData = [event].map((ele:any) => {
+                let quantMultiple = 50;
+                if(ele?.tradingSymbol.includes('BANKNIFTY')){
+                  quantMultiple = 15
+                }
+                if(ele?.tradingSymbol.includes('FINNIFTY')){
+                  quantMultiple = 40
+                }
+                return{
+              exchange: "NFO",
+              tradingsymbol: ele?.tradingSymbol,
+              quantity: String(Math.abs(Number(ele?.netQuantity)/quantMultiple)),
+              price: "0",
+              product: "M",
+              transaction_type:Number(ele?.netQuantity) > 0  ? 'S' : 'B',
+              priceType:  'MKT' ,
+              retention: "IOC",
+              triggerPrice: "0",
+              remarks: "Test1"
                 }
             })
-        )
+            console.log(newData,"newData")
+            dispatch(
+                executeACGAction({
+                    payload: {
+                        requestType: 'POST',
+                        urlPath: ACTION_CODES.FS_PLACE_SINGLE_ORDER,
+                        reqObj: newData[0]
+                    },
+                    storeKey: STORE_KEYS.FS_PLACE_SINGLE_ORDER,
+                    uniqueScreenIdentifier: {
+                        tradeRecd: true
+                    }
+                })
+            )
+        }
+        if(admin){
+            console.log(setName,"setnamse")
+            const newData = [event].map((ele:any) => {
+             return{
+              exchange: "NFO",
+              tradingsymbol: ele?.tradingSymbol,
+              quantity: String(Math.abs(Number(ele?.netQuantity))),
+              product: "M",
+              transactionType:Number(ele?.netQuantity) > 0  ? 'S' : 'B',
+              name: setName
+            }
+            })
+            console.log(newData,"newData")
+            dispatch(
+                executeACGAction({
+                    payload: {
+                        requestType: 'POST',
+                        urlPath: ACTION_CODES.EXIT_SET_ORDER,
+                        reqObj: newData[0]
+                    },
+                    storeKey: STORE_KEYS.EXIT_SET_ORDER,
+                    uniqueScreenIdentifier: {
+                        tradeRecd: true
+                    }
+                })
+            )
+        }
+      
      };
     const handleClick = (requestedBy: string) => {
         console.log(requestedBy,"req")

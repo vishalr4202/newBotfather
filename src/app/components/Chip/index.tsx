@@ -1,7 +1,8 @@
 import React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+// import Avatar from '@material-ui/core/Avatar';
+// import Chip from '@material-ui/core/Chip';
+import {Chip, Avatar} from '@mui/material'
 import Paper from '@material-ui/core/Paper';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';

@@ -16,6 +16,8 @@ import order from '../../assets/order.png'
 export const paths = {
     LOGIN: { path: ['/', '/login'] },
     AdminDash: { path: '/adminDash',title: 'Admin Dashboard' },
+    AdminSetDetail: {path: '/adminset/:name',title: 'Set Detail'},
+    AdminSet: {path: '/adminset',title: 'Set Management'},
     UserDash: { path: '/userDash',title: 'User Dashboard' },
     UserAction: { path: '/useractions',title: 'User Action' },
     PlaceOrder: { path: '/placeorder',title: 'Place Order' },
@@ -32,6 +34,26 @@ export const ROUTES_PATH = [
         path: '/adminDash',
         title: 'Dashboard',
         imgSrc: dashIcon,
+        role:'admin'
+    },
+    {
+        isVisible: true,
+        isHomePage: false,
+        isAccess: false,
+        FeartureCode: 'admset',
+        path: '/adminset',
+        title: 'admin set',
+        imgSrc: UserAction,
+        role:'admin'
+    },
+    {
+        isVisible: false,
+        isHomePage: false,
+        isAccess: false,
+        FeartureCode: 'admdet',
+        path: '/adminset/:name',
+        title: 'admin detail',
+        imgSrc: UserAction,
         role:'admin'
     },
     // {

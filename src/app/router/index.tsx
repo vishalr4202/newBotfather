@@ -12,6 +12,8 @@ import PrivateRoute from './PrivateRoute';
 import UserRoutes from './UserRoutes';
 import UserTabs from '../features/UserActionTabs'
 import PlaceOrderTabs from '../features/PlaceOrderTabs'
+import AdminSet from '../features/AdminSet';
+import AdminSetDetail from '../features/AdminSetDetail';
 const Router = () => {
     return(
         <HashRouter basename="/">
@@ -23,6 +25,8 @@ const Router = () => {
         {/* <UserRoutes exact path={paths.PlaceOrder.path} component={PlaceOrders} /> */}
         <UserRoutes exact path={paths.PlaceOrder.path} component={PlaceOrderTabs} />
         <PrivateRoute exact path={paths.AdminDash.path} component={AdminDash} />
+        <PrivateRoute exact path={paths.AdminSetDetail.path} component={AdminSetDetail} />
+        <PrivateRoute exact path={paths.AdminSet.path} component={AdminSet} />
         <PrivateRoute exact path ={paths.AdminUserDtl.path} component ={UserDetail} />
         <Route path="*">
             <PageNotFound />

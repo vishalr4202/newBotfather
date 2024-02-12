@@ -269,7 +269,7 @@ export default function User(props: Props) {
                                 selectable={selectable}
                                 isSelectAll={isSelectAll}
                             />
-                            {filteredUsers && type == 'double' && filteredUsers.length > 0 && filteredUsers ? (
+                            {/* {filteredUsers && type == 'double' && filteredUsers.length > 0 && filteredUsers ? (
                                 <TableBody>
                                     <TableRow style={{ backgroundColor: '#383B5E' }}>
                                         <TableCell colSpan={12} style={{ borderBottom: '0px', color: '#C0C2D8' }}>
@@ -342,12 +342,6 @@ export default function User(props: Props) {
                                 </TableBody>
                             ) : type == 'multiple' ? (
                                 <TableBody>
-                                    {/* <TableRow style={{ backgroundColor: '#383B5E' }}>
-                                        <TableCell colSpan={12} style={{ borderBottom: '0px', color: '#C0C2D8' }}>
-                                            Machine Parameters
-                                        </TableCell>
-                                    </TableRow> */}
-
                                     {Object.keys(tableDataObj)?.map((arrData: any) => {
                                         return (
                                             <>
@@ -391,16 +385,8 @@ export default function User(props: Props) {
                                         );
                                     })}
                                 </TableBody>
-                            ) : null}
+                            ) : null} */}
                             <TableBody>
-                                {/* {filteredUsers && type == 'double' &&
-                                    filteredUsers.length > 0 ?
-                                    // filteredUsers[0].modelParameters ?
-                                    <TableRow style={{ backgroundColor: '#383B5E' }}>
-                                        <TableCell colSpan={12} style={{ borderBottom: '0px', color: '#C0C2D8' }}>
-                                            Model Parameters
-                                        </TableCell>
-                                    </TableRow> : null} */}
                                 {filteredUsers &&
                                     !type &&
                                     filteredUsers.length > 0 &&
@@ -455,10 +441,6 @@ export default function User(props: Props) {
                                         );
                                     })
                                     : null}
-                                {/* {emptyRows > 0 ||
-                                    (filteredUsers.length == 0 && (
-                                        <TableRow style={{ height: 3 * emptyRows }}></TableRow>
-                                    ))} */}
 
                                 {filteredUsers?.length == 0 ? (
                                     <TableRow className="emptyTable">
@@ -473,43 +455,6 @@ export default function User(props: Props) {
                                     </TableRow>
                                 ) : null}
                             </TableBody>
-                            {/* {filterName?.length > 0 && !type && isUserNotFound && (
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell align="center" colSpan={12} sx={{ py: 3 }}>
-                                            <SearchNotFound searchQuery={filterName} />
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            )} */}
-                            
-                            {/* 
-                            {(filteredUsers?.length === 0 && type === 'modelList') ||
-                            (filteredUsers?.length === 0 && type === 'machineList') ? (
-                                <Container
-                                    maxWidth="xl"
-                                    style={{
-                                        paddingLeft: '16px',
-                                        paddingRight: '16px',
-                                        paddingTop: '24px',
-                                        paddingBottom: '24px'
-                                    }}
-                                >
-                                    <Grid container spacing={2}>
-                                        <h5
-                                            style={{
-                                                marginLeft: '20px',
-                                                marginTop: '20px',
-                                                fontSize: '12px',
-                                                textAlign: 'center',
-                                                color: '#c0c2d8'
-                                            }}
-                                        >
-                                            {noDataText}
-                                        </h5>
-                                    </Grid>
-                                </Container>
-                            ) : null} */}
                         </Table>
                     </TableContainer>
                 </Scrollbar>

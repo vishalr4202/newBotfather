@@ -1,5 +1,5 @@
-// export const BASEURL = 'https://13.235.150.170:443/';
-export const BASEURL = 'http://localhost:8001/';
+export const BASEURL = 'https://13.235.150.170:443/';
+// export const BASEURL = 'http://localhost:8001/';
 // export const BASEURL = 'https://7d30-106-51-173-126.ngrok-free.app/';
 
 export const ACTION_CODES = {
@@ -30,7 +30,19 @@ export const ACTION_CODES = {
     FS_BULL_SPREAD:'fsBullCallSpread',
     FS_BEAR_SPREAD:'fsBearPutSpread',
     FS_GET_INSTRUMENTS:'fsgetInstruments',
-    FS_GET_USERKEYS:'fsGetUserKeys'
+    FS_GET_USERKEYS:'fsGetUserKeys',
+    GET_SETS:'getAllSets',
+    SET_PRIMARY_USER_DETAIL:'primaryUserDetail',
+    PLACE_SET_ORDER:'placeSetOrders',
+    EXIT_SET_ORDER:'exitSetOrders',
+    PRIMARY_SET_POSITION:'primarySetPositions',
+    SET_MULTI_ORDERS:'setplacemultipleorders',
+    SET_SHORT_STRADDLE:'setshortStraddle',
+    SET_SHORT_STRANGLE:'setshortStrangle',
+    SET_LONG_STRADDLE:'setlongStraddle',
+    SET_LONG_STRANGLE:'setlongStrangle',
+    SET_BULL_CALL:'setbullCallSpread',
+    SET_BEAR_PUT:'setbearPutSpread'
 };
 
 export const STORE_KEYS = {
@@ -61,5 +73,17 @@ export const STORE_KEYS = {
     FS_BULL_SPREAD:'fsBullCallSpread',
     FS_BEAR_SPREAD:'fsBearPutSpread',
     FS_GET_INSTRUMENTS:'fsgetInstruments',
-    FS_GET_USERKEYS:'fsGetUserKeys'
+    FS_GET_USERKEYS:'fsGetUserKeys',
+    GET_SETS:'allSets',
+    SET_PRIMARY_USER_DETAIL:'primaryUserDetail',
+    PLACE_SET_ORDER:'placeSetOrders',
+    EXIT_SET_ORDER:'exitSetOrders',
+    PRIMARY_SET_POSITION:'primarySetPositions',
+    SET_MULTI_ORDERS:'setplacemultipleorders',
+    SET_SHORT_STRADDLE:'setshortStraddle',
+    SET_SHORT_STRANGLE:'setshortStrangle',
+    SET_LONG_STRADDLE:'setlongStraddle',
+    SET_LONG_STRANGLE:'setlongStrangle',
+    SET_BULL_CALL:'setbullCallSpread',
+    SET_BEAR_PUT:'setbearPutSpread'
 };

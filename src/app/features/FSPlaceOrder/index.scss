@@ -17,3 +17,57 @@
     top:15px;
     position:relative;
 }
+.simpleLoginButton{
+    background-color:rgba(78, 181, 141, 0.67) !important;
+    width: 100px !important;
+    height:40px !important;
+    // text-transform:uppercase !important;
+    margin-top:30px !important;
+    font-family: montserrat !important;
+    color:white !important;
+}
+.simpleOrderButton{
+    background-color:rgba(78, 181, 141, 0.67) !important;
+    width: 127px !important;
+    height:40px !important;
+    // text-transform:uppercase !important;
+    margin-top:30px !important; 
+    color:white !important;
+    font-family: montserrat !important;
+}
+.simpleBuyButton{
+    background-color:rgba(78, 181, 141, 0.67) !important;
+    width: 100px !important;
+    height:30px !important;
+    text-transform:uppercase !important;
+    margin-top:24px !important;
+    color: white !important;
+    font-family: montserrat !important;
+}
+.simpleSellButton{
+    background-color: rgb(183 60 84 / 80%) !important;
+    width:100px !important;
+    height:30px !important;
+    text-transform:uppercase !important;
+    margin-top:24px !important;
+    color: white !important;
+    font-family: montserrat !important;
+}
+.tableProfitCloseButton{
+    background-color:rgba(78, 181, 141, 0.67) !important;
+    width: 60px !important;
+    height:30px !important;
+    color: white !important;
+    font-family: montserrat !important;
+    box-shadow:none !important;
+    padding:10px;
+}
+.tableLossCloseButton{
+    background-color: rgb(183 60 84 / 80%) !important;
+    width:60px !important;
+    height:30px !important;
+    color: white !important;
+    font-family: montserrat !important;
+    box-shadow:none !important;
+    padding:10px;
+}

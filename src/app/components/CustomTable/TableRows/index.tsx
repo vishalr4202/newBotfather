@@ -14,8 +14,9 @@ import InfoIcon from '@mui/icons-material/InfoOutlined';
 // import clickcallAuth from '../../../features/RemoteAssistance/clickcall.auth'
 // import { executeACGAction, resetErr, updateScreenIdentifiers } from '../../../../app/store/slice';
 import { ACTION_CODES, STORE_KEYS } from '../../../../app/constants/apiConstants';
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 // import useGetState from '../../../utils/hooks/useGetState';
+import Button from '../../Button'
 
 const options = {
     DEFAULT: {
@@ -371,14 +372,24 @@ const UserlistBody = (props: Props) => {
             let isProfit =  Number(pnl) > 0 || row['unrealizedMTOM'] > 0;
             return (
                 <TableCell align="left" key={cellKey}>
-                    <Button
+                    {/* <Button
                      style={{cursor:'pointer',color:'white'}}
                      className={isProfit ? "exitGreen" : "exitRed"}
                      variant="contained" disableElevation
                     size="small"
                     onClick={() => click(row)}>
                         close
-                    </Button>
+                    </Button> */}
+                       <Button
+                            // formInput="buttonDiv"
+                            className={isProfit ? "tableProfitCloseButton" : "tableLossCloseButton"}
+                            fullWidth
+                            name="Close"
+                            type="submit"
+                            variant="contained"
+                            secondary={false}
+                            handleClick={() => click(row)}
+                        />
                 </TableCell>
             );
         }

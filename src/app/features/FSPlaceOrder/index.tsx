@@ -1,4 +1,4 @@
-import { useState, useEffect,memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Container, Card } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { executeACGAction, updateScreenIdentifiers } from '../../store/slice';
@@ -47,8 +47,8 @@ const PlaceOrder = () => {
     const [isStrategy, setIsStrategy] = useState(false);
     const [selectedStrategy, setSelectedStrategy] = useState(0)
     const [chartSymbol, setChartSymbol] = useState<any>([FSInstrument.map((ele: any) => ele?.TradingSymbol)])
-    const [selectedChartSymbol,setSelectedChartSymbol] = useState('')
-    const [chartToken,setChartToken] = useState('26000')
+    const [selectedChartSymbol, setSelectedChartSymbol] = useState('')
+    const [chartToken, setChartToken] = useState('26000')
     const [multiLegged, setMultiLegged] = useState<any>([{ derivative: false, optionType: false, instruments: FSInstrument.filter((ele: any) => ele?.OptionType == "XX").map((ele: any) => ele?.TradingSymbol), selectedInstrument: "", selectedLots: [], orderType: '', BuyorSell: false, limitPrice: '', lotSize: [] }])
     const dispatch = useDispatch();
     const acgStateSelector = createStructuredSelector({
@@ -151,6 +151,7 @@ const PlaceOrder = () => {
         setOrderType(e.target.innerText);
     }
     const setLimitPriceValue = (e: any) => {
+        console.log(e.target.value,"limits")
         setLimitPrice(e.target.value)
     }
 
@@ -266,9 +267,9 @@ const PlaceOrder = () => {
     };
 
     useEffect(() => {
-       const x = setInterval(() => {
+        const x = setInterval(() => {
             getPositions()
-        },2000)
+        }, 2000)
         return () => {
             clearInterval(x)
         }
@@ -277,6 +278,7 @@ const PlaceOrder = () => {
     const [instr, setInstr] = useState<any>([FSInstrument.filter((ele: any) => ele?.OptionType == "XX").map((ele: any) => ele?.TradingSymbol)])
     const [lots, setLots] = useState<any>([[]]);
     const [singleOrder, setSingleOrder] = useState(true)
+    const [quickLots, setQuickLots] = useState('')
 
     const addLeg = () => {
         const newData = [...multiLegged]
@@ -293,7 +295,7 @@ const PlaceOrder = () => {
     }
 
     const changeLegValues = (e: any, index: any, text: string) => {
-        console.log(e.target.innerText, index, text, "inner")
+        console.log(e.target.value, index, text, "inner")
         const data = [...multiLegged]
         const newData = data.map((ele: any, index1: any) => {
             if (index == index1) {
@@ -320,6 +322,7 @@ const PlaceOrder = () => {
                     selectedInstrument: text == 'selectedInstr' ? e.target.innerText ? e.target.innerText : '' : ele?.selectedInstrument,
                     selectedLots: text == 'selectedLots' ? e.target.innerText ? e.target.innerText : '' : ele?.selectedLots,
                     orderType: text == "orderType" ? e.target.innerText ? e.target.innerText : '' : ele?.orderType,
+                    limitPrice: text== "limitPrice" ? e.target.innertext : ''
                 }
             }
             else {
@@ -439,13 +442,13 @@ const PlaceOrder = () => {
         console.log(chipToDelete)
         setSelectedStrategy(chipToDelete?.key)
     };
-    const placeShortStraddle = (e:any) => {
+    const placeShortStraddle = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_SHORT_STRADDLE,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_SHORT_STRADDLE,
                 // uniqueScreenIdentifier: {
@@ -454,13 +457,13 @@ const PlaceOrder = () => {
             })
         );
     };
-    const placeShortStrangle = (e:any) => {
+    const placeShortStrangle = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_SHORT_STRANGLE,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_SHORT_STRANGLE,
                 // uniqueScreenIdentifier: {
@@ -469,13 +472,13 @@ const PlaceOrder = () => {
             })
         );
     };
-    const placeLongStraddle = (e:any) => {
+    const placeLongStraddle = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_LONG_STRADDLE,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_LONG_STRADDLE,
                 // uniqueScreenIdentifier: {
@@ -484,13 +487,13 @@ const PlaceOrder = () => {
             })
         );
     };
-    const placeLongStrangle = (e:any) => {
+    const placeLongStrangle = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_LONG_STRANGLE,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_LONG_STRANGLE,
                 // uniqueScreenIdentifier: {
@@ -500,13 +503,13 @@ const PlaceOrder = () => {
         );
     };
 
-    const placeBullSpread = (e:any) => {
+    const placeBullSpread = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_BULL_SPREAD,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_BULL_SPREAD,
                 // uniqueScreenIdentifier: {
@@ -515,13 +518,13 @@ const PlaceOrder = () => {
             })
         );
     };
-    const placeBearSpread = (e:any) => {
+    const placeBearSpread = (e: any) => {
         dispatch(
             executeACGAction({
                 payload: {
                     requestType: 'POST',
                     urlPath: ACTION_CODES.FS_BEAR_SPREAD,
-                    reqObj:e
+                    reqObj: e
                 },
                 storeKey: STORE_KEYS.FS_BEAR_SPREAD,
                 // uniqueScreenIdentifier: {
@@ -531,24 +534,24 @@ const PlaceOrder = () => {
         );
     };
 
-    const placeStrategy = (e:any,type:string) => {
-        console.log(e,"ashj")
-        if(type=="shortStraddle"){
+    const placeStrategy = (e: any, type: string) => {
+        console.log(e, "ashj")
+        if (type == "shortStraddle") {
             placeShortStraddle(e)
         }
-        if(type=="shortStrangle"){
+        if (type == "shortStrangle") {
             placeShortStrangle(e)
         }
-        if(type=="longStraddle"){
-        placeLongStraddle(e)
+        if (type == "longStraddle") {
+            placeLongStraddle(e)
         }
-        if(type == "longStrangle"){
+        if (type == "longStrangle") {
             placeLongStrangle(e)
         }
-        if(type == "bullSpread"){
+        if (type == "bullSpread") {
             placeBullSpread(e)
         }
-        if(type=="bearSpread"){
+        if (type == "bearSpread") {
             placeBearSpread(e)
         }
     }
@@ -570,34 +573,137 @@ const PlaceOrder = () => {
     // useEffect(() => {
     //     GetInstruments()
     // },[])
-const changeMainSymbol = (e:any) => {
-    const Instrtoken = FSInstrument.filter((ele:any)=> ele?.TradingSymbol==e.target.innerText)
-    setSelectedChartSymbol(e.target.innerText)
-    setChartToken(JSON.stringify(Instrtoken[0]?.Token))
-}
+    const changeMainSymbol = (e: any) => {
+        const Instrtoken = FSInstrument.filter((ele: any) => ele?.TradingSymbol == e.target.innerText)
+        // alert(e.target.innerText)
+        setSelectedChartSymbol(e.target.innerText)
+        setChartToken(JSON.stringify(Instrtoken[0]?.Token))
+        setQuickLots('')
+    }
 
 
-useEffect(() => {
-    if(state?.fsGetUserKeys?.message == undefined){
+    useEffect(() => {
+        if (state?.fsGetUserKeys?.message == undefined) {
+            dispatch(
+                executeACGAction({
+                    payload: {
+                        requestType: 'GET',
+                        urlPath: ACTION_CODES.FS_GET_USERKEYS
+                    },
+                    storeKey: STORE_KEYS.FS_GET_USERKEYS
+                })
+            );
+        }
+    }, [])
+
+    const changeQuickLots = (e: any) => {
+        console.log(selectedChartSymbol, 'selecSymb');
+        let x = 0
+        if (selectedChartSymbol != '' && selectedChartSymbol.includes('BANKNIFTY')) {
+            x = e.target.value <= 900 ? e.target.value : 900
+        }
+        if (selectedChartSymbol != '' && selectedChartSymbol.includes('FINNIFTY')) {
+            x = e.target.value <= 1800 ? Math.ceil(e.target.value / 45) : 1800
+        }
+        if (selectedChartSymbol == '' || selectedChartSymbol.includes('NIFTY')) {
+            x = e.target.value <= 1800 ? e.target.value : 1800
+        }
+        setQuickLots(x.toString())
+    }
+
+    const quickBuySubmit = () => {
+        const newData = {
+            exchange: "NFO",
+            tradingsymbol:selectedChartSymbol,
+            quantity: quickLots,
+            price: "0",
+            product: "M",
+            transaction_type: 'B',
+            priceType:  'MKT',
+            retention: "IOC",
+            triggerPrice: "0",
+            remarks: "Test1",
+            quickTrade:true
+        }
         dispatch(
             executeACGAction({
                 payload: {
-                    requestType: 'GET',
-                    urlPath: ACTION_CODES.FS_GET_USERKEYS
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_PLACE_SINGLE_ORDER,
+                    reqObj: newData
                 },
-                storeKey: STORE_KEYS.FS_GET_USERKEYS
+                storeKey: STORE_KEYS.FS_PLACE_SINGLE_ORDER,
+                uniqueScreenIdentifier: {
+                    tradeRecd: true
+                }
             })
-        );
-    } 
-}, [])
- {/* <iframe style={{ width: '93vw', height: '65vh' }} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=8985&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe> */}
+        )
+    }
+    const quickSellSubmit = () => {
+        const newData = {
+            exchange: "NFO",
+            tradingsymbol:selectedChartSymbol,
+            quantity: quickLots,
+            price: "0",
+            product: "M",
+            transaction_type: 'S',
+            priceType:  'MKT',
+            retention: "IOC",
+            triggerPrice: "0",
+            remarks: "Test1",
+            quickTrade:true
+        }
+        dispatch(
+            executeACGAction({
+                payload: {
+                    requestType: 'POST',
+                    urlPath: ACTION_CODES.FS_PLACE_SINGLE_ORDER,
+                    reqObj: newData
+                },
+                storeKey: STORE_KEYS.FS_PLACE_SINGLE_ORDER,
+                uniqueScreenIdentifier: {
+                    tradeRecd: true
+                }
+            })
+        )
+    }
+    {/* <iframe style={{ width: '93vw', height: '65vh' }} frameBorder="0" src="https://ssltvc.investing.com/?pair_ID=8985&height=550&width=1400&interval=60&plotStyle=candle&domain_ID=56&lang_ID=56&timezone_ID=20" allowFullScreen></iframe> */ }
     return (
-        <div style={{ marginLeft: '0px',marginTop:'5px' }}>
+        <div style={{ marginLeft: '0px', marginTop: '5px' }}>
             <Snackbar className="login-snackbar" options={snackbarOptions} handleClose={closeSnackbar} />
             <Container maxWidth="xl" style={{ marginTop: '0px' }}>
                 <Card style={{ padding: '15px', borderRadius: '10px 10px 0px 0px' }}>
-                    <Autocomplete data={chartSymbol[0]} change={(e: any) =>{changeMainSymbol(e)}} option={''} style={{ width: '270px' }} value={selectedChartSymbol} />
-                    {state?.fsGetUserKeys?.message ? <Chart symbol={chartToken == undefined ? '26000' : chartToken } fsGetUserKeys={state?.fsGetUserKeys?.message}/> : null}
+                    <div style={{ display: 'flex', gap: '1%',marginBottom:'0px',marginLeft:'1%' }}>
+                        <Autocomplete data={chartSymbol[0]} change={(e: any) => { changeMainSymbol(e) }} option={''} style={{ width: '270px' }} value={selectedChartSymbol} />
+                        {/* <Autocomplete data={quickLots} change={()=>{}} value={0} Quantity={true}/> */}
+                        <TextField label={"Quantity"} variant="outlined" onChange={(e) => changeQuickLots(e)} type="number" value={quickLots} style={{ width: '120px' }} />
+                    </div>
+                    <div style={{ display: 'flex', gap: '7%',marginLeft:'1%',position:'absolute',zIndex:'3',marginTop:'0.15%'}}>
+                        <Button
+                            // formInput="buttonDiv"
+                            className="simpleBuyButton"
+                            fullWidth
+                            name="Buy"
+                            type="submit"
+                            variant="contained"
+                            secondary={false}
+                            handleClick={quickBuySubmit}
+                            disabled={selectedChartSymbol !== '' &&  selectedChartSymbol != undefined && quickLots !== '' ? false : true}
+                        />
+                         <Button
+                            // formInput="buttonDiv"
+                            className="simpleSellButton"
+                            fullWidth
+                            name="Sell"
+                            type="submit"
+                            variant="contained"
+                            secondary={false}
+                            handleClick={quickSellSubmit}
+                            disabled={selectedChartSymbol !== '' &&  selectedChartSymbol != undefined && quickLots !== '' ? false : true}
+                        />
+                    </div>
+                    {/* <br /> */}
+                    {state?.fsGetUserKeys?.message ? <Chart symbol={chartToken == undefined ? '26000' : chartToken} fsGetUserKeys={state?.fsGetUserKeys?.message} /> : null}
                 </Card>
                 <Card style={{ borderRadius: '0px 0px 10px 10px', padding: '15px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0px', marginLeft: '7px' }}>
@@ -612,7 +718,7 @@ useEffect(() => {
                     {!isStrategy ? <div>
                         {multiLegged?.map((ele: any, index: any) => {
                             return (
-                                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginTop: '10px' }}>
+                                <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap', marginTop: '10px' }}>
                                     <div style={{ marginTop: '10px' }}>
                                         <Switches type="Futures" change={(e: any) => changeLegValues(e, index, 'derivative')} checked={ele?.derivative} />
                                     </div>
@@ -627,9 +733,11 @@ useEffect(() => {
                                     </div>
 
                                     {ele?.instruments ? <Autocomplete data={instr[index]} change={(e: any) => changeLegValues(e, index, 'selectedInstr')} option={ele?.derivative} style={{ width: '270px' }} value={ele?.selectedInstrument} /> : <h6 style={{ marginTop: '17px' }}>No Instruments data, please login to your broker</h6>}
-                                    {ele?.instruments ? <Autocomplete data={lots[index]} type="numbers" change={(e: any) => changeLegValues(e, index, 'selectedLots')} value={ele?.selectedLots} /> : null}
+                                    {ele?.instruments ? <Autocomplete data={lots[index]} type="numbers" change={(e: any) => changeLegValues(e, index, 'selectedLots')} value={ele?.selectedLots} style={{ width: '100px' }} /> : null}
                                     {ele?.instruments ? <Autocomplete data={['Market', 'Limit']} orderType={true} change={(e: any) => changeLegValues(e, index, 'orderType')} type="numbers" style={{ width: '180px' }} value={ele?.orderType} /> : null}
-                                    {ele?.orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e) => setLimitPriceValue(e)} type="number" value={ele?.limitPrice} style={{ width: '120px' }} /> : null}
+                                    {/* {ele?.orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e) => setLimitPriceValue(e)} type="number" value={ele?.limitPrice} style={{ width: '120px' }} /> : null} */}
+                                    {ele?.orderType == 'Limit' ? <TextField label={"Price"} variant="outlined" onChange={(e: any) => changeLegValues(e, index, 'limitPrice')} type="number" value={ele?.limitPrice} style={{ width: '120px' }} /> : null}
+                                   
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
                                         {index == 0 ? null : <DeleteOutlineIcon onClick={() => deleteLeg(index)} className='remove_more_icon'></DeleteOutlineIcon>}
@@ -638,13 +746,14 @@ useEffect(() => {
                                         <div className="orderButtonDiv">
                                             <Button
                                                 formInput="buttonDiv"
-                                                className="simpleLoginButton"
+                                                className="simpleOrderButton"
                                                 fullWidth
                                                 name="Place Order"
                                                 type="submit"
                                                 variant="contained"
                                                 secondary={false}
                                                 handleClick={submitOrder}
+                                               
                                             />
                                         </div> : null}
 
@@ -653,7 +762,7 @@ useEffect(() => {
                                         <div className="orderButtonDiv">
                                             <Button
                                                 formInput="buttonDiv"
-                                                className="simpleLoginButton"
+                                                className="simpleOrderButton"
                                                 fullWidth
                                                 name="Place Order"
                                                 variant="contained"
@@ -669,22 +778,22 @@ useEffect(() => {
                             <Chip click={handleClickChip} active={selectedStrategy} />
                             {isStrategy ?
                                 <div>
-                                    {selectedStrategy == 0 ? <ShortStraddle click={(e:any)=>placeStrategy(e,"shortStraddle")}/> : null}
-                                    {selectedStrategy == 1 ? <ShortStrangle click={(e:any)=>placeStrategy(e,"shortStrangle")}/> : null}
-                                    {selectedStrategy == 2 ? <LongStraddle click = {(e:any)=>placeStrategy(e,"longStraddle")} /> : null}
-                                    {selectedStrategy == 3 ? <LongStrangle click = {(e:any)=>placeStrategy(e,"longStrangle")} /> : null}
-                                    {selectedStrategy == 4 ? <BullSpread click = {(e:any)=>placeStrategy(e,"bullSpread")} /> : null}
-                                    {selectedStrategy == 5 ? <BearSpread click = {(e:any)=>placeStrategy(e,"bearSpread")} /> : null}
+                                    {selectedStrategy == 0 ? <ShortStraddle click={(e: any) => placeStrategy(e, "shortStraddle")} /> : null}
+                                    {selectedStrategy == 1 ? <ShortStrangle click={(e: any) => placeStrategy(e, "shortStrangle")} /> : null}
+                                    {selectedStrategy == 2 ? <LongStraddle click={(e: any) => placeStrategy(e, "longStraddle")} /> : null}
+                                    {selectedStrategy == 3 ? <LongStrangle click={(e: any) => placeStrategy(e, "longStrangle")} /> : null}
+                                    {selectedStrategy == 4 ? <BullSpread click={(e: any) => placeStrategy(e, "bullSpread")} /> : null}
+                                    {selectedStrategy == 5 ? <BearSpread click={(e: any) => placeStrategy(e, "bearSpread")} /> : null}
                                 </div>
                                 : null}
                         </div>
 
                     }
                 </Card>
-
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '5px' }}>
-                <AdminPositions data={state?.fspositions?.message?.data?.filter((ele: any) => Math.abs(Number(ele?.RealizedPNL)) == 0)} type="positions" />
+            {/* .filter((ele: any) => Math.abs(Number(ele?.RealizedPNL)) == 0) */}
+                <AdminPositions data={state?.fspositions?.message?.data?.filter((ele: any) => Math.abs(Number(ele?.netQuantity)) != 0)} type="positions" />
             </Container>
         </div>
     )

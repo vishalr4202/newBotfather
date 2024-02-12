@@ -26,8 +26,8 @@ const useStyles = makeStyles({
         '&.MuiButton-root': {
             textTransform: 'none'
         },
-        background:'rgba(78, 181, 141, 0.67) !important',
-        marginTop:'40px !important'
+        // background:'rgba(78, 181, 141, 0.67) !important',
+        // marginTop:'40px !important'
     },
     primaryButton: {
         background: '#5d97f6',

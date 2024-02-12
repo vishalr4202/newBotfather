@@ -176,7 +176,7 @@ function MiniDrawer() {
                     const __route = { ...route };
                     if (state?.loginData?.role === route.role ) {
                         __route.isAccess = true;
-                        __route.isVisible = true;
+                        __route.isVisible = route?.isVisible;
                         newRoutes.push(__route);
                     }
                 // });
