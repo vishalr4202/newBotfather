@@ -42,7 +42,8 @@ export const ACTION_CODES = {
     SET_LONG_STRADDLE:'setlongStraddle',
     SET_LONG_STRANGLE:'setlongStrangle',
     SET_BULL_CALL:'setbullCallSpread',
-    SET_BEAR_PUT:'setbearPutSpread'
+    SET_BEAR_PUT:'setbearPutSpread',
+    SET_LOGIN_ALL:'setloginAll'
 };
 
 export const STORE_KEYS = {
@@ -85,5 +86,6 @@ export const STORE_KEYS = {
     SET_LONG_STRADDLE:'setlongStraddle',
     SET_LONG_STRANGLE:'setlongStrangle',
     SET_BULL_CALL:'setbullCallSpread',
-    SET_BEAR_PUT:'setbearPutSpread'
+    SET_BEAR_PUT:'setbearPutSpread',
+    SET_LOGIN_ALL:'setloginAll'
 };
